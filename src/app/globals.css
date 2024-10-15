@@ -17,11 +17,33 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
 }
 
-@layer utilities {
+@layer utilities { 
   .text-balance {
-    text-wrap: balance;
+    /* Note: text-wrap: balance; may not work in all browsers */
+    /* Replace this with a supported property or remove it */
+    text-wrap: normal; /* Example of a fallback */
   }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.card-enter {
+  animation: slideIn 0.5s forwards; /* Adjust duration as needed */
+}
+
+.shadow-neumorphic {
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2), 
+              -8px -8px 20px rgba(255, 255, 255, 0.9);
 }

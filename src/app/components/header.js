@@ -2,16 +2,20 @@ import React from "react";
 
 const Header = () => {
   return(
-    <header className="bg-white p-4 flex items-center justify-between">
+    <header className="bg-gray-100 p-4 flex items-center justify-between shadow-neumorphic">
       {/* Left Side: Title */}
-      <h1 className="text-gray-900 text-2xl font-bold font-sans">FB</h1>
+      <h1 className="text-gray-900 text-2xl font-bold font-sans">Logo</h1>
       
       {/* Center: Navigation Links */}
-      <nav className="flex-grow flex justify-center space-x-4">
-        <a href="/" className="text-gray-900 font-semibold font-sans text-sm">Home</a>
-        <a href="/menu" className="text-gray-900 font-semibold font-sans text-sm">Menu</a>
-        <a href="/cart" className="text-gray-900 font-semibold font-sans text-sm">Cart</a>
-      </nav>
+      <nav className="flex-grow flex justify-center space-x-3"> {/* Adjusted space-x value */}
+        <a href="/" className="text-gray-900 font-semibold font-sans text-md">Home</a>
+          <span className="text-gray-900 font-semibold">|</span> {/* Separator */}
+        <a href="/menu" className="text-gray-900 font-semibold font-sans text-md">Menu</a>
+          <span className="text-gray-900 font-semibold">|</span> {/* Separator */}
+        <a href="/cart" className="text-gray-900 font-semibold font-sans text-md">Cart</a>
+            <span className="text-gray-900 font-semibold">|</span> {/* Separator */}
+        <a href="/info" className="text-gray-900 font-semibold font-sans text-md">Info</a>
+</nav>
 
       {/* Right Side: Log In Button */}
       <button className="flex items-center text-gray-900 font-semibold font-sans text-base">
