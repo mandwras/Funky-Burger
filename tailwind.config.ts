@@ -11,9 +11,15 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "#FF6B6B",  // Example primary color
+        secondary: "#4ECDC4", // Example secondary color
+      },
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'], // Set Roboto as the default sans font
       },
     },
   },
   plugins: [],
 };
+
 export default config;
