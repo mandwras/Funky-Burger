@@ -30,7 +30,7 @@ const Form = () => {
                     type="password"
                     required
                   />
-                  <button className="flip-card__btn">Let's go!</button>
+                  <button className="flip-card__btn">Login!</button>
                 </form>
               </div>
               <div className="flip-card__back">
@@ -56,7 +56,7 @@ const Form = () => {
                     type="password"
                     required
                   />
-                  <button className="flip-card__btn">Confirm!</button>
+                  <button className="flip-card__btn">Sign Up!</button>
                 </form>
               </div>
             </div>
