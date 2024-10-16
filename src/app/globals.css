@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -46,4 +49,10 @@ body {
 .shadow-neumorphic {
   box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.2), 
               -8px -8px 20px rgba(255, 255, 255, 0.9);
+}
+
+
+.pixel-font{
+  font-family: 'Press Start 2P', cursive;
+  font-weight: 400;
 }

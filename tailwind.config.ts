@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Roboto', 'sans-serif'], // Add Roboto as the default sans-serif font
+        sans: ['Roboto', 'sans-serif'],
+        pixel: ['Press Start 2P', 'sans-serif'],
       },
     },
   },

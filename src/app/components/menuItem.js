@@ -5,9 +5,9 @@ const MenuItems = () => {
     {
       name: "Classic Burger",
       description: "A juicy beef patty with lettuce, tomato, and our special sauce.",
-      image: "/icons/burger1.png", // Replace with actual image path
-      rightIcon: "/icons/heart.png", // Replace with an icon path for the right side
-      rightDescription: "Customer Favorite", // Description beside the right icon
+      image: "/icons/burger1.png", 
+      rightIcon: "/icons/heart.png", 
+      rightDescription: "Customer Favorite",
     },
     {
       name: "Cheeseburger",
@@ -27,7 +27,7 @@ const MenuItems = () => {
       name: "Veggie Burger",
       description: "A delicious plant-based patty with avocado and veggies.",
       image: "/icons/burger1.png",
-      rightIcon: "/icons/leaf.png", // Different icon
+      rightIcon: "/icons/leaf.png", 
       rightDescription: "Vegetarian Option",
     },
     {
@@ -40,9 +40,9 @@ const MenuItems = () => {
   ];
 
   return (
-    <div className="p-8">
-      <h2 className="text-3xl font-bold mb-6">Our Menu</h2>
-      <div className="space-y-8">
+    <div className="p-8 flex-row" >
+      <h2 className="text-center text-black text-3xl mb-6 pixel-font">Funky's Menu</h2>
+      <div className="space-y-8 flex flex-col">
         {items.map((item, index) => (
           <div
             key={index}
@@ -56,8 +56,11 @@ const MenuItems = () => {
                 className="w-32 h-32 object-cover rounded-lg mb-4 md:mb-0 md:mr-6"
               />
               <div>
-                <h3 className="text-xl font-semibold text-gray-900">{item.name}</h3>
-                <p className="text-gray-700 mt-2">{item.description}</p>
+                <h3 className="pixel-font text-xl font-semibold text-gray-900">{item.name}</h3>
+                <p className="pixel-font text-gray-700 mt-2">{item.description}</p>
+                <div className="border mt-4 w-[90px] shadow-neumorphic rounded-md border-gray-900"> 
+                  <p className="text-gray-900 text-sm font-bold text-center">Add to Cart</p>
+                </div>
               </div>
             </div>
 
@@ -68,7 +71,7 @@ const MenuItems = () => {
                 alt={item.rightDescription}
                 className="w-6 h-6 object-contain"
               />
-              <p className="text-gray-700">{item.rightDescription}</p>
+              <p className="pixel-font text-gray-700">{item.rightDescription}</p>
             </div>
           </div>
         ))}
