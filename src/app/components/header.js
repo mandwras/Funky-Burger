@@ -21,7 +21,7 @@ const Header = () => {
           Menu
         </Link>
         <span className="text-gray-900 font-semibold">|</span> {/* Separator */}
-        <Link href="/" className="text-gray-900 font-semibold font-sans text-md">
+        <Link href="/" className="text-gray-900 font-semibold font-sans text-md cart-button">
           Cart
         </Link>
         <span className="text-gray-900 font-semibold">|</span> {/* Separator */}

@@ -1,6 +1,9 @@
-import React from "react";
+"use client"
+import React, {useState} from "react";
+import Image from "next/image";
 
 const MenuItems = () => {
+
   const items = [
     {
       name: "Classic Burger",
@@ -43,6 +46,42 @@ const MenuItems = () => {
       price: 9.5,
     },
   ];
+  
+  const handleAddToCart = (e) => {
+    const { pageX, pageY } = e; // Get cursor position 
+
+    const cart = document.querySelector('.cart-button'); // Get cart element
+    const cartRect = cart.getBoundingClientRect(); // Get cart's position
+    const floatingItem = document.createElement('img');
+
+    // Set the source of the image
+    floatingItem.src = 'icons/burger1.png'; // Replace with your image URL
+    
+    // Set styles to position the image
+    floatingItem.style.position = 'absolute';
+    floatingItem.style.top = `${pageY}px`;
+    floatingItem.style.left = `${pageX}px`;
+    floatingItem.style.width = '20px'; 
+    floatingItem.style.height = '20px'; 
+    floatingItem.style.zIndex = '1000';
+    
+
+    
+    // Add the img element to the DOM
+    document.body.appendChild(floatingItem);
+
+    // Start the animation 
+    floatingItem.animate(
+      [
+        { transform: `translate(0, 0) scale(3)`, opacity: 1 }, 
+        { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(1.5)`, opacity: 1 }, 
+        { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(0)`, opacity: 0 }
+      ],
+      { duration: 1000, easing: 'ease-in-out' }
+    ).onfinish = () => {
+      document.body.removeChild(floatingItem); 
+    };
+  };
 
   return (
     <div className="p-8 flex-row" >
@@ -64,11 +103,10 @@ const MenuItems = () => {
                 <h3 className="pixel-font text-xl font-semibold text-gray-900">{item.name}<span className="p-1"></span>{item.price}$</h3>
                 <p className="pixel-font text-gray-700 mt-2">{item.description}</p>
                 <div className="border mt-4 w-[90px] shadow-neumorphic rounded-md border-gray-900 flex justify-center "> 
-                  <button className="flex text-gray-900 text-sm font-bold">Add to Cart</button>
+                <button onClick={handleAddToCart} className="flex justify-center items-center text-gray-900 text-sm font-bold">Add to Cart</button>
                 </div>
               </div>
             </div>
-
             {/* Right Side: Icon and Text */}
             <div className="flex items-center space-x-2">
               <img
