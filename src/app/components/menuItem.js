@@ -75,6 +75,8 @@ const MenuItems = () => {
       [
         { transform: `translate(0, 0) scale(3)`, opacity: 1 }, 
         { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(1.5)`, opacity: 1 }, 
+        //{ transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(0)`, opacity: 0 }, a bounce effect on the end that i dk if i want
+        //{ transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(1.5)`, opacity: 1 }, remove // if i want
         { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(0)`, opacity: 0 }
       ],
       { duration: 1000, easing: 'ease-in-out' }
