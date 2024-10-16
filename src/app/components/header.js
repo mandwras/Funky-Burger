@@ -13,7 +13,7 @@ const Header = () => {
           Home
         </Link>
         <span className="text-gray-900 font-semibold">|</span> {/* Separator */}
-        <Link href="/" className="text-gray-900 font-semibold font-sans text-md">
+        <Link href="menu" className="text-gray-900 font-semibold font-sans text-md">
           Menu
         </Link>
         <span className="text-gray-900 font-semibold">|</span> {/* Separator */}
