@@ -3,9 +3,13 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="bg-gray-100 p-4 flex items-center justify-between shadow-neumorphic">
-      {/* Left Side: Title */}
-      <h1 className="text-gray-900 text-2xl font-bold font-sans">Logo</h1>
+<header className="bg-gray-100 p-4 flex items-center justify-between shadow-neumorphic">
+  {/* Left Side: Logo */}
+  <img 
+    src="/icons/burger-logo.png" 
+    alt="Funky Burger Logo" 
+    className="w-16 h-16 object-contain" 
+  />
       
       {/* Center: Navigation Links */}
       <nav className="flex-grow flex justify-center space-x-3">
