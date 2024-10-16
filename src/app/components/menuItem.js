@@ -8,6 +8,7 @@ const MenuItems = () => {
       image: "/icons/burger1.png", 
       rightIcon: "/icons/heart.png", 
       rightDescription: "Customer Favorite",
+      price: 8.5,
     },
     {
       name: "Cheeseburger",
@@ -15,6 +16,7 @@ const MenuItems = () => {
       image: "/icons/burger1.png",
       rightIcon: "/icons/star.png",
       rightDescription: "Best Seller",
+      price: 9.5,
     },
     {
       name: "Bacon Burger",
@@ -22,6 +24,7 @@ const MenuItems = () => {
       image: "/icons/burger1.png",
       rightIcon: "/icons/star.png",
       rightDescription: "Top Rated",
+      price: 8,
     },
     {
       name: "Veggie Burger",
@@ -29,6 +32,7 @@ const MenuItems = () => {
       image: "/icons/burger1.png",
       rightIcon: "/icons/leaf.png", 
       rightDescription: "Vegetarian Option",
+      price: 10,
     },
     {
       name: "Mand Burger",
@@ -36,6 +40,7 @@ const MenuItems = () => {
       image: "/icons/burger1.png",
       rightIcon: "/icons/leaf.png",
       rightDescription: "Healthy Choice",
+      price: 9.5,
     },
   ];
 
@@ -56,10 +61,10 @@ const MenuItems = () => {
                 className="w-32 h-32 object-cover rounded-lg mb-4 md:mb-0 md:mr-6"
               />
               <div>
-                <h3 className="pixel-font text-xl font-semibold text-gray-900">{item.name}</h3>
+                <h3 className="pixel-font text-xl font-semibold text-gray-900">{item.name}<span className="p-1"></span>{item.price}$</h3>
                 <p className="pixel-font text-gray-700 mt-2">{item.description}</p>
-                <div className="border mt-4 w-[90px] shadow-neumorphic rounded-md border-gray-900"> 
-                  <p className="text-gray-900 text-sm font-bold text-center">Add to Cart</p>
+                <div className="border mt-4 w-[90px] shadow-neumorphic rounded-md border-gray-900 flex justify-center "> 
+                  <button className="flex text-gray-900 text-sm font-bold">Add to Cart</button>
                 </div>
               </div>
             </div>
