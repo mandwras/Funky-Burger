@@ -105,8 +105,7 @@ const MenuItems = () => {
     }
 
     const cartRect = cart.getBoundingClientRect(); // Get cart's position
-    console.log(`Cart Pos ${cartRect.left} ${cartRect.bottom} ${cartRect.top} ${cartRect.right}XY${cartRect.X} ${cartRect.y}`)
-
+    
     const floatingItem = document.createElement('img');
 
 
