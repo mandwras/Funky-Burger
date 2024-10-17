@@ -17,7 +17,7 @@ const ReturnToTop = () => {
 
     // Cleanup on unmount
     return () => window.removeEventListener("scroll", toggleVisibility);
-  }, []);
+  }, );
 
   // Scroll to top 
   const scrollToTop = () => {

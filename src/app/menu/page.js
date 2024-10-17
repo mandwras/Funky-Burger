@@ -5,6 +5,7 @@ import AboutUs2 from "../components/aboutus2"
 import Link from "next/link";
 import MenuItems from "../components/menuItem";
 import ReturnToTop from "../components/returnToTop"
+import ShoppingCart from "../components/shoppingCart"
 
 
 const Menu = () => {
@@ -13,6 +14,7 @@ const Menu = () => {
         <Header/>
         <MenuItems/>
         <ReturnToTop/>
+        <ShoppingCart/> 
       </div>
   )
 } 
