@@ -5,6 +5,7 @@ import AboutUs from "./components/aboutus";
 import AboutUs2 from "./components/aboutus2";
 import Link from "next/link";
 import ReturnToTop from "./components/returnToTop";
+import Footer from "./components/footer"
 
 
 const Home = () => {
@@ -23,6 +24,7 @@ const Home = () => {
         <AboutUs2 />
         <AboutUs />
         <ReturnToTop />
+        <Footer />
       </div>
     </>
   );

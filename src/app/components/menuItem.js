@@ -85,17 +85,32 @@ const MenuItems = () => {
       rightDescription: "Healthy Choice",
       price: 9.5  ,
     },
+    
   ];
   
   const handleAddToCart = (e) => {
     const { pageX, pageY } = e; // Get cursor position 
+    let cart;
+    // if (window.scrollY < 100) {
+      cart = document.querySelector('.cart-button'); // cart no scroll
+      console.log('no scroll cart');
+    // } else {
+    //   cart = document.querySelector('.scrolled-cart'); // cart on scroll
+    //   console.log('on scroll cart');
+    // }
 
-    const cart = document.querySelector('.cart-button'); // Get cart element
+    if (!cart) {
+      console.error('Cart element not found');
+      return; // Exit if cart is not found
+    }
+
     const cartRect = cart.getBoundingClientRect(); // Get cart's position
+    console.log(`Cart Pos ${cartRect.left} ${cartRect.bottom} ${cartRect.top} ${cartRect.right}XY${cartRect.X} ${cartRect.y}`)
+
     const floatingItem = document.createElement('img');
 
-    // Set the source of the image
-    floatingItem.src = 'icons/burger1.png'; // Replace with your image URL
+
+     floatingItem.src = 'icons/burger1.png'; 
     
     // Set styles to position the image
     floatingItem.style.position = 'absolute';
@@ -111,18 +126,20 @@ const MenuItems = () => {
     document.body.appendChild(floatingItem);
 
     // Start the animation 
-    floatingItem.animate(
-      [
-        { transform: `translate(0, 0) scale(3)`, opacity: 1 }, 
-        { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(1.5)`, opacity: 1 }, 
-        //{ transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(0)`, opacity: 0 }, a bounce effect on the end that i dk if i want
-        //{ transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(1.5)`, opacity: 1 }, remove // if i want
-        { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(0)`, opacity: 0 }
-      ],
-      { duration: 1000, easing: 'ease-in-out' }
-    ).onfinish = () => {
-      document.body.removeChild(floatingItem); 
-    };
+      floatingItem.animate(
+        [
+          { transform: `translate(0, 0) scale(3)`, opacity: 1 }, 
+          { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(1.5)`, opacity: 1 }, 
+          //{ transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(0)`, opacity: 0 }, a bounce effect on the end that i dk if i want
+          //{ transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(1.5)`, opacity: 1 }, remove // if i want
+          { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(0)`, opacity: 0 }
+        ],
+        { duration: 1000, easing: 'ease-in-out' }
+      ).onfinish = () => {
+        document.body.removeChild(floatingItem); 
+      };
+
+
   };
 
   return (
@@ -144,8 +161,8 @@ const MenuItems = () => {
               <div>
                 <h3 className="pixel-font text-xl font-semibold text-gray-900">{item.name}<span className="p-1"></span>{item.price}$</h3>
                 <p className="pixel-font text-gray-700 mt-2">{item.description}</p>
-                <div className="border mt-4 w-[90px] shadow-neumorphic rounded-md border-gray-900 flex justify-center "> 
-                <button onClick={handleAddToCart} className="flex justify-center items-center text-gray-900 text-sm font-bold">Add to Cart</button>
+                <div className="border mt-4 w-[90px] shadow-neumorphic rounded-md border-gray-900 flex justify-center bg-emerald-300"> 
+                <button onClick={handleAddToCart} className="flex justify-center items-center text-purple-900 text-sm font-bold">Add to Cart</button>
                 </div>
               </div>
             </div>

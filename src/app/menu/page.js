@@ -6,6 +6,7 @@ import Link from "next/link";
 import MenuItems from "../components/menuItem";
 import ReturnToTop from "../components/returnToTop"
 import ShoppingCart from "../components/shoppingCart"
+import Footer from "../components/footer";
 
 
 const Menu = () => {
@@ -15,6 +16,7 @@ const Menu = () => {
         <MenuItems/>
         <ReturnToTop/>
         <ShoppingCart/> 
+        <Footer bgColor="bg-white"/>
       </div>
   )
 } 
