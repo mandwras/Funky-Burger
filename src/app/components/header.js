@@ -41,7 +41,7 @@ return (
               Info
             </Link>
             <span className="text-gray-900 font-semibold">|</span> {/* Separator */}
-            <div onClick={toggleCart} className="text-gray-900 font-semibold font-sans text-md cart-button flex items-center">
+            <div onClick={toggleCart} className="cursor-pointer text-gray-900 font-semibold font-sans text-md cart-button flex items-center transform hover:scale-110 transition-transform duration-300">
               <img src="/icons/cart.png" alt="Cart" className="w-9 h-9 object-contain" />
             </div>
         </nav>
