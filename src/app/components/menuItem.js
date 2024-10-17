@@ -43,7 +43,7 @@ const MenuItems = () => {
       image: "/icons/burger1.png",
       rightIcon: "/icons/leaf.png",
       rightDescription: "Healthy Choice",
-      price: 9.5,
+      price: 9.5  ,
     },
   ];
   

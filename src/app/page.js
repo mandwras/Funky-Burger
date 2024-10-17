@@ -4,6 +4,8 @@ import Header from "./components/header";
 import AboutUs from "./components/aboutus";
 import AboutUs2 from "./components/aboutus2";
 import Link from "next/link";
+import ReturnToTop from "./components/returnToTop";
+
 
 const Home = () => {
   return (
@@ -19,6 +21,8 @@ const Home = () => {
         <Header />
         <AboutUs />
         <AboutUs2 />
+        <AboutUs />
+        <ReturnToTop />
       </div>
     </>
   );
