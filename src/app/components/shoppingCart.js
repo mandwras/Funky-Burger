@@ -8,6 +8,7 @@ const ShoppingCart = () => {
 
   const [isCartVisible, setCartVisible] = useState (false);
 
+
   const toggleCart = () => {
     setCartVisible(!isCartVisible)
   };

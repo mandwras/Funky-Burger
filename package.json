@@ -6,9 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "server": "json-server --watch src/items.json --port 5000"
+
   },
   "dependencies": {
+    "json-server": "^1.0.0-beta.3",
     "next": "14.2.15",
     "react": "^18",
     "react-dom": "^18",
