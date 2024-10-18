@@ -1,8 +1,18 @@
 "use client"
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Image from "next/image";
 
 const MenuItems = () => {
+  //server
+  const [item, getItems] = useState([])
+  const[loading, setLoading] = useState(true)
+
+  useEffect(() => { 
+    const fetchItems = async () => {
+      const res = await fetch('http://localhost:5000')
+    }
+    fetchItems
+  }, [])
 
   const items = [
     {
