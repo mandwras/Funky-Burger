@@ -14,6 +14,7 @@ const MenuItems = () => {
     fetchItems
   }, [])
 
+  //will delete
   const items = [
     {
       name: "Classic Burger",
