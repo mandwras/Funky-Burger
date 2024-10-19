@@ -27,7 +27,7 @@ const AboutUs = () => {
       }
     };
   }, [cardRef]);
-
+  
   return (
     <div className="flex-row pl-[30%] items-center justify-left mt-20">
       <div

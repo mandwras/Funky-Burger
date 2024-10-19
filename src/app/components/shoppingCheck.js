@@ -7,7 +7,7 @@ const ShoppingCheck = ({ isVisible, closeCart }) => {
         isVisible ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      {/* Cart Header */}
+      {/* CartHeader */}
       <div className="p-4 flex justify-between items-center bg-gray-100 border-b shadow-neumorphic">
         <h2 className="text-xl font-semibold text-gray-800">Your Cart</h2>
         <button onClick={closeCart} className="text-gray-500">
