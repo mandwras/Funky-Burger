@@ -6,7 +6,7 @@ const MenuItems = () => {
   //server
   const [item, getItems] = useState([])
   const[loading, setLoading] = useState(true)
-
+  //fetching
   useEffect(() => { 
     const fetchItems = async () => {
       const res = await fetch('http://localhost:5000')
