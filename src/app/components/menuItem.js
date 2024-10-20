@@ -1,15 +1,23 @@
 "use client"
 import React, {useState, useEffect} from "react";
 import Image from "next/image";
+import { SUBRESOURCE_INTEGRITY_MANIFEST } from "next/dist/shared/lib/constants";
 
 const MenuItems = () => {
   //server
-  const [item, getItems] = useState([])
+  const [item, setItems] = useState([])
   const[loading, setLoading] = useState(true)
   //fetching
   useEffect(() => { 
     const fetchItems = async () => {
-      const res = await fetch('http://localhost:5000')
+      try {
+        const res = await fetch('http://localhost:5000')
+        const data = await res.json();
+        setItems(data);
+      } catch (error) {
+        console.log('Catch')
+      }
+
     }
     fetchItems
   }, [])
