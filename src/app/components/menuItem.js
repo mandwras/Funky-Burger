@@ -22,7 +22,7 @@ const MenuItems = () => {
     fetchItems
   }, [])
 
-  //will delete
+  //will delete//
   const items = [
     {
       name: "Classic Burger",
