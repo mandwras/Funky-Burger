@@ -5,108 +5,25 @@ import { SUBRESOURCE_INTEGRITY_MANIFEST } from "next/dist/shared/lib/constants";
 
 const MenuItems = () => {
   //server
-  const [item, setItems] = useState([])
+  const [items, setItems] = useState([])
   const[loading, setLoading] = useState(true)
   //fetching
   useEffect(() => { 
     const fetchItems = async () => {
       try {
-        const res = await fetch('http://localhost:5000')
+        const res = await fetch('http://localhost:5000/items')
         const data = await res.json();
         setItems(data);
       } catch (error) {
-        console.log('Catch')
+        console.log('Error fetching data!', error)
+      } finally{
+        setLoading(false)
       }
 
     }
-    fetchItems
+    fetchItems();
   }, [])
 
-  //will delete//
-  const items = [
-    {
-      name: "Classic Burger",
-      description: "A juicy beef patty with lettuce, tomato, and our special sauce.",
-      image: "/icons/burger1.png", 
-      rightIcon: "/icons/heart.png", 
-      rightDescription: "Customer Favorite",
-      price: 8.5,
-    },
-    {
-      name: "Cheeseburger",
-      description: "Topped with cheddar cheese, onions, and pickles.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/star.png",
-      rightDescription: "Best Seller",
-      price: 9.5,
-    },
-    {
-      name: "Bacon Burger",
-      description: "A burger loaded with crispy bacon, cheese, and BBQ sauce.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/star.png",
-      rightDescription: "Top Rated",
-      price: 8,
-    },
-    {
-      name: "Veggie Burger",
-      description: "A delicious plant-based patty with avocado and veggies.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/leaf.png", 
-      rightDescription: "Vegetarian Option",
-      price: 10,
-    },
-    {
-      name: "Mand Burger",
-      description: "A delicious plant-based patty with avocado and veggies.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/leaf.png",
-      rightDescription: "Healthy Choice",
-      price: 9.5  ,
-    },
-    {
-      name: "Classic Burger",
-      description: "A juicy beef patty with lettuce, tomato, and our special sauce.",
-      image: "/icons/burger1.png", 
-      rightIcon: "/icons/heart.png", 
-      rightDescription: "Customer Favorite",
-      price: 8.5,
-    },
-    {
-      name: "Cheeseburger",
-      description: "Topped with cheddar cheese, onions, and pickles.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/star.png",
-      rightDescription: "Best Seller",
-      price: 9.5,
-    },
-    {
-      name: "Bacon Burger",
-      description: "A burger loaded with crispy bacon, cheese, and BBQ sauce.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/star.png",
-      rightDescription: "Top Rated",
-      price: 8,
-    },
-    {
-      name: "Veggie Burger",
-      description: "A delicious plant-based patty with avocado and veggies.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/leaf.png", 
-      rightDescription: "Vegetarian Option",
-      price: 10,
-    },
-    {
-      name: "Mand Burger",
-      description: "A delicious plant-based patty with avocado and veggies.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/leaf.png",
-      rightDescription: "Healthy Choice",
-      price: 9.5  ,
-    },
-    
-  ];
-  
   const handleAddToCart = (e) => {
     const { pageX, pageY } = e; // Get cursor position 
     let cart;
@@ -164,7 +81,7 @@ const MenuItems = () => {
     <div className="p-8 flex-row" >
       <h2 className="text-center text-black text-3xl mb-6 pixel-font">Funky's Menu</h2>
       <div className="space-y-8 flex flex-col">
-        {items.map((item, index) => (
+        {items.map((items, index) => (
           <div
             key={index}
             className="flex flex-col md:flex-row items-center justify-between bg-gray-100 p-6 rounded-lg shadow-neumorphic"
@@ -172,13 +89,13 @@ const MenuItems = () => {
             {/* Left Side: Image and Text */}
             <div className="flex flex-col md:flex-row items-center">
               <img
-                src={item.image}
-                alt={item.name}
+                src={items.image}
+                alt={items.name}
                 className="w-32 h-32 object-cover rounded-lg mb-4 md:mb-0 md:mr-6"
               />
               <div>
-                <h3 className="pixel-font text-xl font-semibold text-gray-900">{item.name}<span className="p-1"></span>{item.price}$</h3>
-                <p className="pixel-font text-gray-700 mt-2">{item.description}</p>
+                <h3 className="pixel-font text-xl font-semibold text-gray-900">{items.name}<span className="p-1"></span>{items.price}$</h3>
+                <p className="pixel-font text-gray-700 mt-2">{items.description}</p>
                 <div className="border mt-4 w-[90px] shadow-neumorphic rounded-md border-gray-900 flex justify-center bg-emerald-300"> 
                 <button onClick={handleAddToCart} className="flex justify-center items-center text-purple-900 text-sm font-bold">Add to Cart</button>
                 </div>
@@ -187,11 +104,11 @@ const MenuItems = () => {
             {/* Right Side: Icon and Text */}
             <div className="flex items-center space-x-2">
               <img
-                src={item.rightIcon}
-                alt={item.rightDescription}
+                src={items.rightIcon}
+                alt={items.rightDescription}
                 className="w-6 h-6 object-contain"
               />
-              <p className="pixel-font text-gray-700">{item.rightDescription}</p>
+              <p className="pixel-font text-gray-700">{items.rightDescription}</p>
             </div>
           </div>
         ))}
