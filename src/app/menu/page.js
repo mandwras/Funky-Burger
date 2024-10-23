@@ -1,14 +1,43 @@
 "use client"
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Header from "../components/header";
 import Link from "next/link";
 import MenuItems from "../components/menuItem";
 import ReturnToTop from "../components/returnToTop"
 import ShoppingCart from "../components/shoppingCart"
 import Footer from "../components/footer";
-
+import ShoppingCheck from "../components/shoppingCheck";
 
 const Menu = () => {
+  //logic for cart visibility
+  const [isCartVisible, setCartVisible] = useState (false);
+
+
+  const toggleCart = () => {
+    setCartVisible(!isCartVisible)
+  };
+
+  const closeCart = () => {
+    setCartVisible(false)
+  }
+
+  const [isVisible, setIsVisible] = useState(false)
+  //scroll down
+  useEffect(() => {
+    const toggleVisibility = () =>{
+      if (window.scrollY > 100) {
+        setIsVisible(true)
+        console.log('active')
+      } else {
+        setIsVisible(false)
+        console.log('hidden')
+      }
+    };
+    window.addEventListener("scroll", toggleVisibility);
+    return() => window.removeEventListener("scroll", toggleVisibility)
+  }
+  )
+
   const [cart, setCart] = useState([])
   const handleAddToCart = (item, e) => {
     console.log(`${item.id} leitourgei`)
@@ -23,10 +52,12 @@ const Menu = () => {
         return prevCart.map((cartItem) =>
           cartItem.id === item.id
             ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
+            : cartItem,
+            console.log(cart.length),
         );
       } else {
         // If item is not in the cart, add it with quantity 1
+        console.log(cart)
         return [...prevCart, { ...item, quantity: 1 }];
       }
     });
@@ -86,8 +117,9 @@ const Menu = () => {
         <Header/>
         <MenuItems handleAddToCart={handleAddToCart}/>
         <ReturnToTop/>
-        <ShoppingCart/> 
+        <ShoppingCart toggleCart={toggleCart} isVisible ={isVisible}/> 
         <Footer bgColor="bg-white"/>
+        <ShoppingCheck isVisible={isCartVisible} closeCart={closeCart} cart={cart}/>
       </div>
   )
 } 

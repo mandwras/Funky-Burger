@@ -1,6 +1,6 @@
 import React from "react";
 
-const ShoppingCheck = ({ isVisible, closeCart , cart}) => {
+const ShoppingCheck = ({ isVisible, closeCart, cart = [] }) => {
   return (
     <div
       className={`fixed top-0 right-0 h-full w-64 bg-white shadow-neumorphic transition-transform transform ${
@@ -14,8 +14,21 @@ const ShoppingCheck = ({ isVisible, closeCart , cart}) => {
           Close
         </button>
       </div>
-      <div className="pt-5 pl-2">
-        <p className="text-gray-800">Your cart is empty.</p>
+
+      <div className="p-4">
+        {/* Render cart items */}
+        {cart.length > 0 ? (
+          <ul className="space-y-4">
+            {cart.map((item) => (
+              <li key={item.id} className="flex justify-between items-center">
+                <span className="text-gray-800">{item.name}</span>
+                <span className="text-gray-500">x{item.quantity}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-gray-800">Your cart is empty.</p>
+        )}
       </div>
     </div>
   );
