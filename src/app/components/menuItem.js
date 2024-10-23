@@ -2,10 +2,13 @@
 import React, {useState, useEffect} from "react";
 
 
-const MenuItems = () => {
+const MenuItems = ({handleAddToCart}) => {
   //server
   const [items, setItems] = useState([])
   const[loading, setLoading] = useState(true) // not used yet
+
+
+
   //fetching
   useEffect(() => { 
     const fetchItems = async () => {
@@ -23,59 +26,7 @@ const MenuItems = () => {
     fetchItems();
   }, [])
 
-  const handleAddToCart = (item, e) => {
-    console.log(item.id)
-    const { pageX, pageY } = e; // Get cursor position 
-    let cart;
-    // if (window.scrollY < 100) {
-      cart = document.querySelector('.cart-button'); // cart no scroll
-      console.log('no scroll cart');
-    // } else {
-    //   cart = document.querySelector('.scrolled-cart'); // cart on scroll
-    //   console.log('on scroll cart');
-    // }
-
-    if (!cart) {
-      console.error('Cart element not found');
-      return; // Exit if cart is not found
-    }
-
-    const cartRect = cart.getBoundingClientRect(); // Get cart's position
-    
-    const floatingItem = document.createElement('img');
-
-
-     floatingItem.src = 'icons/burger1.png'; 
-    
-    // Set styles to position the image
-    floatingItem.style.position = 'absolute';
-    floatingItem.style.top = `${pageY}px`;
-    floatingItem.style.left = `${pageX}px`;
-    floatingItem.style.width = '20px'; 
-    floatingItem.style.height = '20px'; 
-    floatingItem.style.zIndex = '1000';
-    
-
-    
-    // Add the img element to the DOM
-    document.body.appendChild(floatingItem);
-
-    // Start the animation 
-      floatingItem.animate(
-        [
-          { transform: `translate(0, 0) scale(3)`, opacity: 1 }, 
-          { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(1.5)`, opacity: 1 }, 
-          // { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(0)`, opacity: 0 }, //a bounce effect on the end that i dk if i want
-          // { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(1.5)`, opacity: 1 }, //remove if i want
-          { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(0)`, opacity: 0 }
-        ],
-        { duration: 1000, easing: 'ease-in-out' }
-      ).onfinish = () => {
-        document.body.removeChild(floatingItem); 
-      };
-
-
-  };
+  
 
   return (
     <div className="p-8 flex-row" >

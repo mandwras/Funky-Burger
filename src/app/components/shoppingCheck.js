@@ -1,6 +1,6 @@
 import React from "react";
 
-const ShoppingCheck = ({ isVisible, closeCart }) => {
+const ShoppingCheck = ({ isVisible, closeCart , cart}) => {
   return (
     <div
       className={`fixed top-0 right-0 h-full w-64 bg-white shadow-neumorphic transition-transform transform ${
