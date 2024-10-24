@@ -1,6 +1,7 @@
 import React from "react";
 
 const ShoppingCheck = ({ isVisible, closeCart, cart = [] }) => {
+  console.log(cart)
   return (
     <div
       className={`fixed top-0 right-0 h-full w-64 bg-white shadow-neumorphic transition-transform transform ${
