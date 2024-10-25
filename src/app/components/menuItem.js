@@ -62,7 +62,7 @@ const MenuItems = ({handleAddToCart}) => {
                 width={100}
                 height={100}
               />
-              <p className="pixel-font text-gray-700">{item.rightDescription}</p>
+              <p className="pixel-font text-sm text-gray-700">{item.rightDescription}</p>
             </div>
           </div>
         ))}
