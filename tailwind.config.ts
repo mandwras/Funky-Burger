@@ -12,10 +12,12 @@ const config: Config = {
         sans: ['Roboto', 'sans-serif'],
         pixel: ['Press Start 2P', 'sans-serif'],
       },
+      fontSize: {
+        tiny: '0.6rem',  // Define the custom tiny text size
+      },
     },
   },
   plugins: [],
 };
 
 export default config;
-

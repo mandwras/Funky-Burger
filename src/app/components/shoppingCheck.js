@@ -43,14 +43,14 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [] , setCart}) => {
           <ul className="space-y-4">
             {cart.map((item) => (
               <li key={item.id} className="flex justify-between items-center">
-                <span className="text-gray-800 pixel-font">{item.name}</span>
+                <span className="text-gray-800 pixel-font text-tiny">{item.name}</span>
                 <button
                     onClick={() => handleQuantityChange(item, -1)}
                     className="px-2 text-red-500 font-bold"
                   >
                     -
                   </button>
-                  <span className="text-gray-500 pixel-font mx-2">x{item.quantity}</span>
+                  <span className="text-gray-500 pixel-font mx-2 text-tiny">x{item.quantity}</span>
                   <button
                     onClick={() => handleQuantityChange(item, 1)}
                     className="px-2 text-green-500 font-bold"

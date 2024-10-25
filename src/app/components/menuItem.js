@@ -20,7 +20,7 @@ const MenuItems = ({handleAddToCart}) => {
       } catch (error) {
         console.log('Error fetching data!', error)
       } finally{
-        setLoading(false)
+        //setLoading(false)
       }
 
     }
@@ -46,10 +46,10 @@ const MenuItems = ({handleAddToCart}) => {
                 className="w-32 h-32 object-cover rounded-lg mb-4 md:mb-0 md:mr-6" width={100} height={100}
               />
               <div>
-                <h3 className="pixel-font text-xl font-semibold text-gray-900">{item.name}<span className="p-1"></span>{item.price}$</h3>
-                <p className="pixel-font text-gray-700 mt-2">{item.description}</p>
+                <h3 className="pixel-font text-l font-semibold text-gray-900">{item.name}<span className="p-1"></span>{item.price}$</h3>
+                <p className="pixel-font text-sm text-gray-700 mt-2">{item.description}</p>
                 <div className="border mt-4 w-[90px] shadow-neumorphic rounded-md border-gray-900 flex justify-center bg-emerald-300"> 
-                <button onClick={(e) => handleAddToCart(item, e)} className="flex justify-center items-center text-purple-900 text-sm font-bold">Add to Cart</button>
+                <button onClick={(e) => handleAddToCart(item, e)} className="flex justify-center items-center text-purple-900 text-tiny font-bold pixel-font">Add to Cart</button>
                 </div>
               </div>
             </div>
