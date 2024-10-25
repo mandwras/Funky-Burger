@@ -30,7 +30,7 @@ const MenuItems = ({handleAddToCart}) => {
 
   return (
     <div className="p-8 flex-row" >
-      <h2 className="text-center text-black text-3xl mb-6 pixel-font">Funky's Menu</h2>
+      <h2 className="text-center text-black text-3xl mb-6 pixel-font">Funky&apos;s Menu</h2>
       <div className="space-y-8 flex flex-col">
         {items.map((item, index) => (
           <div

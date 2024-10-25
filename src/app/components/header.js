@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import ShoppingCheck from "./shoppingCheck";
-import ShoppingCart from "./shoppingCart";
+//import ShoppingCheck from "./shoppingCheck";
+//import ShoppingCart from "./shoppingCart";
 
 const Header = ({ toggleCart }) => {
   return (
