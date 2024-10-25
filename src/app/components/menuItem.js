@@ -1,11 +1,12 @@
 "use client"
 import React, {useState, useEffect} from "react";
+import Image from "next/image";
 
 
 const MenuItems = ({handleAddToCart}) => {
   //server
   const [items, setItems] = useState([])
-  const[loading, setLoading] = useState(true) // not used yet
+  //const[loading, setLoading] = useState(true) // not used yet
 
 
 
@@ -39,10 +40,10 @@ const MenuItems = ({handleAddToCart}) => {
           >
             {/* Left Side: Image and Text */}
             <div className="flex flex-col md:flex-row items-center">
-              <img
+              <Image
                 src={item.image}
                 alt={item.name}
-                className="w-32 h-32 object-cover rounded-lg mb-4 md:mb-0 md:mr-6"
+                className="w-32 h-32 object-cover rounded-lg mb-4 md:mb-0 md:mr-6" width={100} height={100}
               />
               <div>
                 <h3 className="pixel-font text-xl font-semibold text-gray-900">{item.name}<span className="p-1"></span>{item.price}$</h3>
@@ -54,10 +55,12 @@ const MenuItems = ({handleAddToCart}) => {
             </div>
             {/* Right Side: Icon and Text */}
             <div className="flex items-center space-x-2">
-              <img
+              <Image
                 src={item.rightIcon}
                 alt={item.rightDescription}
                 className="w-6 h-6 object-contain"
+                width={100}
+                height={100}
               />
               <p className="pixel-font text-gray-700">{item.rightDescription}</p>
             </div>

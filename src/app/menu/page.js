@@ -9,11 +9,15 @@ import ShoppingCheck from "../components/shoppingCheck";
 
 const Menu = () => {
   const [isCartVisible, setCartVisible] = useState(false);
-  const [cart, setCart] = useState(() => {
-    // Load cart from localStorage
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
+  const [cart, setCart] = useState([]);
+
+  // Load cart from localStorage only on the client side
+  useEffect(() => {
+    if (typeof window !== 'undefined') {  // Check if window is defined
+      const savedCart = localStorage.getItem("cart");
+      setCart(savedCart ? JSON.parse(savedCart) : []);
+    }
+  }, []);
 
   const toggleCart = () => {
     setCartVisible(!isCartVisible);

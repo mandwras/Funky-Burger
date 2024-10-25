@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 //import ShoppingCheck from "./shoppingCheck";
 //import ShoppingCart from "./shoppingCart";
 
@@ -9,10 +10,10 @@ const Header = ({ toggleCart }) => {
     <>
       <header className="bg-gray-100 p-4 flex items-center justify-between shadow-neumorphic">
         {/* Left Side: Logo */}
-        <img 
+        <Image
           src="/icons/burger-logo.png" 
           alt="Funky Burger Logo" 
-          className="w-16 h-16 object-contain" 
+          className="w-16 h-16 object-contain"  width={100} height={100}
         />
 
         {/* Center: Navigation Links */}
@@ -35,7 +36,7 @@ const Header = ({ toggleCart }) => {
             onClick={toggleCart} 
             className="cursor-pointer text-gray-900 font-semibold font-sans text-md cart-button flex items-center transform hover:scale-110 transition-transform duration-300"
           >
-            <img src="/icons/cart.png" alt="Cart" className="w-9 h-9 object-contain" />
+            <Image src="/icons/cart.png" alt="Cart" className="w-9 h-9 object-contain" width={100} height={100} />
           </div>
         </nav>
 
