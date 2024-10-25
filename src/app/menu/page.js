@@ -89,7 +89,7 @@ const Menu = () => {
       <ReturnToTop />
       <ShoppingCart toggleCart={toggleCart} isVisible={isVisible} />
       <Footer bgColor="bg-white" />
-      <ShoppingCheck isVisible={isCartVisible} closeCart={closeCart} cart={cart} />
+      <ShoppingCheck isVisible={isCartVisible} closeCart={closeCart} cart={cart} setCart={setCart}/>
     </div>
   );
 };

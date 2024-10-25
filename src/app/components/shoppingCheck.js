@@ -1,7 +1,28 @@
 import React from "react";
 
-const ShoppingCheck = ({ isVisible, closeCart, cart = [] }) => {
+const ShoppingCheck = ({ isVisible, closeCart, cart = [] , setCart}) => {
   console.log(cart)
+
+
+  const handleQuantityChange = (item, change) => {
+    setCart((prevCart) => {
+      return prevCart.map((cartItem) => {
+        if (cartItem.id === item.id) {
+          // Adjust quantity by the specified change value
+          const updatedQuantity = cartItem.quantity + change;
+          // If quantity is 0 or less, filter the item out of the cart
+          if (updatedQuantity <= 0) {
+            return null; // Return null to remove it from the cart
+          }
+          return { ...cartItem, quantity: updatedQuantity };
+        }
+        return cartItem;
+      }).filter(Boolean); // Remove null items from the array
+    });
+  };
+
+
+
   return (
     <div
       className={`fixed top-0 right-0 h-full w-64 bg-white shadow-neumorphic transition-transform transform ${
@@ -23,8 +44,19 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [] }) => {
             {cart.map((item) => (
               <li key={item.id} className="flex justify-between items-center">
                 <span className="text-gray-800 pixel-font">{item.name}</span>
-                <span className="text-gray-500 pixel-font">x{item.quantity}</span> 
-                <span>Remove</span> 
+                <button
+                    onClick={() => handleQuantityChange(item, -1)}
+                    className="px-2 text-red-500 font-bold"
+                  >
+                    -
+                  </button>
+                  <span className="text-gray-500 pixel-font mx-2">x{item.quantity}</span>
+                  <button
+                    onClick={() => handleQuantityChange(item, 1)}
+                    className="px-2 text-green-500 font-bold"
+                  >
+                    +
+                  </button>
               </li>
             ))}
           </ul>
