@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const MenuItems = ({handleAddToCart}) => {
   //server
-  const [items, setItems] = useState([])
+  // const [items, setItems] = useState([])
   //const[loading, setLoading] = useState(true) // not used yet
 
 
