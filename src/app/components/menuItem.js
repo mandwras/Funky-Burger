@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const MenuItems = ({handleAddToCart}) => {
   //server
-  // const [items, setItems] = useState([])
+  const [items, setItems] = useState([])
   //const[loading, setLoading] = useState(true) // not used yet
 
 
@@ -27,99 +27,13 @@ const MenuItems = ({handleAddToCart}) => {
     fetchItems();
   }, [])
 
-
-
-  const items2 = [
-    {
-      name: "Classic Burger",
-      description: "A juicy beef patty with lettuce, tomato, and our special sauce.",
-      image: "/icons/burger1.png", 
-      rightIcon: "/icons/heart.png", 
-      rightDescription: "Customer Favorite",
-      price: 8.5,
-    },
-    {
-      name: "Cheeseburger",
-      description: "Topped with cheddar cheese, onions, and pickles.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/star.png",
-      rightDescription: "Best Seller",
-      price: 9.5,
-    },
-    {
-      name: "Bacon Burger",
-      description: "A burger loaded with crispy bacon, cheese, and BBQ sauce.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/star.png",
-      rightDescription: "Top Rated",
-      price: 8,
-    },
-    {
-      name: "Veggie Burger",
-      description: "A delicious plant-based patty with avocado and veggies.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/leaf.png", 
-      rightDescription: "Vegetarian Option",
-      price: 10,
-    },
-    {
-      name: "Mand Burger",
-      description: "A delicious plant-based patty with avocado and veggies.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/leaf.png",
-      rightDescription: "Healthy Choice",
-      price: 9.5  ,
-    },
-    {
-      name: "Classic Burger",
-      description: "A juicy beef patty with lettuce, tomato, and our special sauce.",
-      image: "/icons/burger1.png", 
-      rightIcon: "/icons/heart.png", 
-      rightDescription: "Customer Favorite",
-      price: 8.5,
-    },
-    {
-      name: "Cheeseburger",
-      description: "Topped with cheddar cheese, onions, and pickles.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/star.png",
-      rightDescription: "Best Seller",
-      price: 9.5,
-    },
-    {
-      name: "Bacon Burger",
-      description: "A burger loaded with crispy bacon, cheese, and BBQ sauce.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/star.png",
-      rightDescription: "Top Rated",
-      price: 8,
-    },
-    {
-      name: "Veggie Burger",
-      description: "A delicious plant-based patty with avocado and veggies.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/leaf.png", 
-      rightDescription: "Vegetarian Option",
-      price: 10,
-    },
-    {
-      name: "Mand Burger",
-      description: "A delicious plant-based patty with avocado and veggies.",
-      image: "/icons/burger1.png",
-      rightIcon: "/icons/leaf.png",
-      rightDescription: "Healthy Choice",
-      price: 9.5  ,
-    },
-    
-  ];
-
   
 
   return (
     <div className="p-8 flex-row" >
       <h2 className="text-center text-black text-3xl mb-6 pixel-font">Funky&apos;s Menu</h2>
       <div className="space-y-8 flex flex-col">
-        {items2.map((item, index) => (
+        {items.map((item, index) => (
           <div
             key={index}
             className="flex flex-col md:flex-row items-center justify-between bg-gray-100 p-6 rounded-lg shadow-neumorphic"
