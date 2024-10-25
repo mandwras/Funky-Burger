@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Funky Burger",
+  title: "Funky Burger",  
   description: "Created By Giannis Mandoras",
 };
 
@@ -25,11 +25,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased font-press-start`}
       >
         {children}
       </body>
     </html>
   );
 }
+
+
+
+

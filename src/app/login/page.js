@@ -2,7 +2,6 @@
 import React from "react";
 import Header from "../components/header";
 import Form from "../components/form"
-import { metadata } from "../layout";
 const Login = () => {
   return (
     <div className="bg-gray-200 min-h-screen"> 
