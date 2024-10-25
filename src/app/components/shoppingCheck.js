@@ -16,14 +16,15 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [] }) => {
         </button>
       </div>
 
-      <div className="p-4">
+      <div className="p-4 shadow-neumorphic m-2 mt-5">
         {/* Render cart items */}
         {cart.length > 0 ? (
           <ul className="space-y-4">
             {cart.map((item) => (
               <li key={item.id} className="flex justify-between items-center">
-                <span className="text-gray-800">{item.name}</span>
-                <span className="text-gray-500">x{item.quantity}</span>
+                <span className="text-gray-800 pixel-font">{item.name}</span>
+                <span className="text-gray-500 pixel-font">x{item.quantity}</span> 
+                <span>Remove</span> 
               </li>
             ))}
           </ul>
