@@ -79,13 +79,14 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
               </li>
             ))}
           </ul>
-        ) : (
-          <p className="text-gray-800">Your cart is empty.</p>
+        ) : ( 
+          <div className="mt-[270px] flex justify-center items-center w-90 h-20 bg-white shadow-neumorphic "><p className="text-gray-600 pixel-font text-tiny">Your cart is empty.</p></div>
+
         )}
       </div>
 
       {/* Total Price and Checkout Button */}
-      <div className="p-4 bg-gray-100 rounded-md m-2">
+      <div className="p-4 shadow-lg  m-2">
         <div className="flex justify-between items-center">
           <div className="px-4 py-4 bg-purple-500 text-white rounded-md pixel-font text-sm ml-2">
             Total:${totalPrice.toFixed(2)}
