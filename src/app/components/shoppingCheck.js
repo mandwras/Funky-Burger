@@ -1,62 +1,80 @@
 import React from "react";
 
-const ShoppingCheck = ({ isVisible, closeCart, cart = [] , setCart}) => {
-  console.log(cart)
-
-
+const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
   const handleQuantityChange = (item, change) => {
     setCart((prevCart) => {
-      return prevCart.map((cartItem) => {
-        if (cartItem.id === item.id) {
-          // Adjust quantity by the specified change value
-          const updatedQuantity = cartItem.quantity + change;
-          // If quantity is 0 or less, filter the item out of the cart
-          if (updatedQuantity <= 0) {
-            return null; // Return null to remove it from the cart
+      return prevCart
+        .map((cartItem) => {
+          if (cartItem.id === item.id) {
+            const updatedQuantity = cartItem.quantity + change;
+            if (updatedQuantity <= 0) {
+              return null;
+            }
+            return { ...cartItem, quantity: updatedQuantity };
           }
-          return { ...cartItem, quantity: updatedQuantity };
-        }
-        return cartItem;
-      }).filter(Boolean); // Remove null items from the array
+          return cartItem;
+        })
+        .filter(Boolean);
     });
   };
 
-
-
   return (
     <div
-      className={`fixed top-0 right-0 h-full w-64 bg-white shadow-neumorphic transition-transform transform ${
+      className={`fixed top-0 right-0 h-full w-90 bg-white shadow-neumorphic transition-transform transform ${
         isVisible ? "translate-x-0" : "translate-x-full"
       }`}
     >
-      {/* CartHeader */}
+      {/* Cart Header */}
       <div className="p-4 flex justify-between items-center bg-gray-100 border-b shadow-neumorphic">
-        <h2 className="text-xl font-semibold text-gray-800">Your Cart</h2>
-        <button onClick={closeCart} className="text-gray-500">
+        <h2 className="text-md pixel-font font-semibold text-gray-800 w-5 text-[rgb(116,129,129)]">
+          Your Cart
+        </h2>
+        <button
+          onClick={closeCart}
+          className="text-[rgb(116,129,129)] pixel-font text-sm"
+        >
           Close
         </button>
       </div>
 
-      <div className="p-4 shadow-neumorphic m-2 mt-5">
-        {/* Render cart items */}
+      {/* Cart Items Container */}
+      <div className="p-4 space-y-4">
         {cart.length > 0 ? (
           <ul className="space-y-4">
             {cart.map((item) => (
-              <li key={item.id} className="flex justify-between items-center">
-                <span className="text-gray-800 pixel-font text-tiny">{item.name}</span>
-                <button
-                    onClick={() => handleQuantityChange(item, -1)}
-                    className="px-2 text-red-500 font-bold"
-                  >
-                    -
-                  </button>
-                  <span className="text-gray-500 pixel-font mx-2 text-tiny">x{item.quantity}</span>
-                  <button
-                    onClick={() => handleQuantityChange(item, 1)}
-                    className="px-2 text-green-500 font-bold"
-                  >
-                    +
-                  </button>
+              <li
+                key={item.id}
+                className="shadow-neumorphic rounded-lg p-4 flex flex-col items-start"
+              >
+                {/* Neumorphic Item Card */}
+                <div className="flex justify-between items-center w-full">
+                  <span className="text-gray-800 pixel-font text-sm">
+                    {item.name}
+                  </span>
+                  <div className="flex items-center space-x-2">
+                    <button
+                      onClick={() => handleQuantityChange(item, -1)}
+                      className="px-2 text-red-500 "
+                    >
+                      -
+                    </button>
+                    <span className="text-gray-500 pixel-font text-sm">
+                      x{item.quantity}
+                    </span>
+                    <button
+                      onClick={() => handleQuantityChange(item, 1)}
+                      className="px-2 text-green-500 "
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+                <p className="text-gray-500 pixel-font text-tiny mt-1">
+                  A juicy beef patty...
+                </p>
+                <span className="text-gray-800 pixel-font text-xs mt-2 font-bold">
+                  $$ {/* Replace with item price if available */}
+                </span>
               </li>
             ))}
           </ul>
