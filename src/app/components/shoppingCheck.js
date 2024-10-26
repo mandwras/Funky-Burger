@@ -1,6 +1,9 @@
 import React from "react";
 
 const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
+  // Calculate total price
+  const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+
   const handleQuantityChange = (item, change) => {
     setCart((prevCart) => {
       return prevCart
@@ -22,7 +25,7 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
     <div
       className={`fixed top-0 right-0 h-full w-90 bg-white shadow-neumorphic transition-transform transform ${
         isVisible ? "translate-x-0" : "translate-x-full"
-      }`}
+      } flex flex-col`}
     >
       {/* Cart Header */}
       <div className="p-4 flex justify-between items-center bg-gray-100 border-b shadow-neumorphic">
@@ -38,21 +41,19 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
       </div>
 
       {/* Cart Items Container */}
-      <div className="p-4 space-y-4">
+      <div className="p-4 flex-grow overflow-y-auto space-y-4">
         {cart.length > 0 ? (
           <ul className="space-y-4">
             {cart.map((item, index) => (
               <li
                 key={item.id}
                 className={`rounded-lg p-4 flex flex-col items-start ${
-                  index % 2 === 0 ? "bg-white" : "bg-[#F5F1F1]" // Change background color on odd or not 
+                  index % 2 === 0 ? "bg-white" : "bg-[#F5F1F1]"
                 } shadow-neumorphic`}
               >
                 {/* Neumorphic Item Card */}
                 <div className="flex justify-between items-center w-full">
-                  <span className="text-gray-800 pixel-font text-sm">
-                    {item.name}
-                  </span>
+                  <span className="text-gray-800 pixel-font text-sm">{item.name}</span>
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => handleQuantityChange(item, -1)}
@@ -60,9 +61,7 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
                     >
                       -
                     </button>
-                    <span className="text-gray-500 pixel-font text-sm">
-                      x{item.quantity}
-                    </span>
+                    <span className="text-gray-500 pixel-font text-sm">x{item.quantity}</span>
                     <button
                       onClick={() => handleQuantityChange(item, 1)}
                       className="px-2 text-green-500"
@@ -74,8 +73,8 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
                 <p className="text-gray-500 pixel-font text-tiny mt-1">
                   {item.description.slice(0, 18)}...
                 </p>
-                <span className="text-gray-700 pixel-font text-sm mt-2 ">
-                  ${item.price} {/* Replace with item price if available */}
+                <span className="text-gray-700 pixel-font text-sm mt-2">
+                  ${(item.price * item.quantity).toFixed(2)}
                 </span>
               </li>
             ))}
@@ -84,8 +83,25 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
           <p className="text-gray-800">Your cart is empty.</p>
         )}
       </div>
+
+      {/* Total Price and Checkout Button */}
+      <div className="p-4 bg-gray-100 rounded-md m-2">
+        <div className="flex justify-between items-center">
+          <div className="px-4 py-4 bg-purple-500 text-white rounded-md pixel-font text-sm ml-2">
+            Total:${totalPrice.toFixed(2)}
+          </div>
+          <button className="px-4 py-4 bg-green-500 text-white rounded-md pixel-font text-sm ml-2">
+            Checkout
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
 
 export default ShoppingCheck;
+
+
+{/* <span className="text-md pixel-font text-gray-600">
+Total:${totalPrice.toFixed(2)}
+</span> */}
