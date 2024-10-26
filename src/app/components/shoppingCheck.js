@@ -41,10 +41,12 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
       <div className="p-4 space-y-4">
         {cart.length > 0 ? (
           <ul className="space-y-4">
-            {cart.map((item) => (
+            {cart.map((item, index) => (
               <li
                 key={item.id}
-                className="shadow-neumorphic rounded-lg p-4 flex flex-col items-start"
+                className={`rounded-lg p-4 flex flex-col items-start ${
+                  index % 2 === 0 ? "bg-white" : "bg-[#F5F1F1]" // Change background color on odd or not 
+                } shadow-neumorphic`}
               >
                 {/* Neumorphic Item Card */}
                 <div className="flex justify-between items-center w-full">
@@ -54,7 +56,7 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => handleQuantityChange(item, -1)}
-                      className="px-2 text-red-500 "
+                      className="px-2 text-red-500"
                     >
                       -
                     </button>
@@ -63,17 +65,17 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
                     </span>
                     <button
                       onClick={() => handleQuantityChange(item, 1)}
-                      className="px-2 text-green-500 "
+                      className="px-2 text-green-500"
                     >
                       +
                     </button>
                   </div>
                 </div>
                 <p className="text-gray-500 pixel-font text-tiny mt-1">
-                  A juicy beef patty...
+                  {item.description.slice(0, 18)}...
                 </p>
-                <span className="text-gray-800 pixel-font text-xs mt-2 font-bold">
-                  $$ {/* Replace with item price if available */}
+                <span className="text-gray-700 pixel-font text-sm mt-2 ">
+                  ${item.price} {/* Replace with item price if available */}
                 </span>
               </li>
             ))}
