@@ -34,7 +34,7 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
         </h2>
         <button
           onClick={closeCart}
-          className="text-[rgb(116,129,129)] pixel-font text-sm"
+          className="text-[rgb(116,129,129)] pixel-font text-sm hover:text-red-500 transition-all duration-200 ease-in-out"
         >
           Close
         </button>

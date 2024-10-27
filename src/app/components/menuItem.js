@@ -48,8 +48,8 @@ const MenuItems = ({handleAddToCart}) => {
               <div>
                 <h3 className="pixel-font text-l font-semibold text-gray-900">{item.name}<span className="p-1"></span>{item.price}$</h3>
                 <p className="pixel-font text-sm text-gray-700 mt-2">{item.description}</p>
-                <div className="border mt-4 mb-3 w-[120px] h-8 shadow-md rounded-md border-gray-900 flex justify-center bg-emerald-300"> 
-                <button onClick={(e) => handleAddToCart(item, e)} className="flex justify-center items-center text-purple-900 text-tiny font-bold pixel-font ">Add to Cart</button>
+                <div className="hover:scale-105 transition-all duration-200 ease-in-out  border mt-4 mb-3 w-[120px] h-8 shadow-md rounded-md border-gray-900 flex justify-center bg-white hover:bg-emerald-300"> 
+                <button onClick={(e) => handleAddToCart(item, e)} className=" flex justify-center items-center text-purple-900 text-tiny font-bold pixel-font ">Add to Cart</button>
                 </div>
               </div>
             </div>
