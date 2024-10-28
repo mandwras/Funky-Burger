@@ -1,81 +1,67 @@
-"use client"
+import React, { useState, useEffect } from 'react';
 
-const cartHandle = () => {
-  const [isCartVisible, setCartVisible] = useState(false);
+function CartHandle() {
+  // State to manage the cart items
   const [cart, setCart] = useState([]);
-
-  // Load cart from localStorage only on the client side
-  useEffect(() => {
-    if (typeof window !== 'undefined') {  // Check if window is defined
-      const savedCart = localStorage.getItem("cart");
-      setCart(savedCart ? JSON.parse(savedCart) : []);
-    }
-  }, []);
-
-  const toggleCart = () => {
-    setCartVisible(!isCartVisible);
-  };
-
-  const closeCart = () => {
-    setCartVisible(false);
-  };
-
-  const handleAddToCart = (item, e) => {
-    setCart((prevCart) => {
-      const itemInCart = prevCart.find((cartItem) => cartItem.id === item.id);
-      const newCart = itemInCart
-        ? prevCart.map((cartItem) =>
-            cartItem.id === item.id
-              ? { ...cartItem, quantity: cartItem.quantity + 1 }
-              : cartItem
-          )
-        : [...prevCart, { ...item, quantity: 1 }];
-
-      // Save new cart to localStorage
-      localStorage.setItem("cart", JSON.stringify(newCart));
-      return newCart;
-    });
-
-    // Floating item animation (optional, as per your previous logic)
-    const { pageX, pageY } = e;
-    const cartElement = document.querySelector('.cart-button');
-    if (!cartElement) return;
-
-    const cartRect = cartElement.getBoundingClientRect();
-    const floatingItem = document.createElement('img');
-    floatingItem.src = 'icons/burger1.png'; 
-    floatingItem.style.position = 'absolute';
-    floatingItem.style.top = `${pageY}px`;
-    floatingItem.style.left = `${pageX}px`;
-    floatingItem.style.width = '20px';
-    floatingItem.style.height = '20px';
-    floatingItem.style.zIndex = '1000';
-
-    document.body.appendChild(floatingItem);
-
-    floatingItem.animate(
-      [
-        { transform: `translate(0, 0) scale(3)`, opacity: 1 },
-        { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(1.5)`, opacity: 1 },
-        { transform: `translate(${cartRect.left - pageX}px, ${cartRect.top - pageY}px) scale(0)`, opacity: 0 }
-      ],
-      { duration: 1000, easing: 'ease-in-out' }
-    ).onfinish = () => {
-      document.body.removeChild(floatingItem);
-    };
-  };
-
   const [isVisible, setIsVisible] = useState(false);
 
+  // Toggle the cart's visibility
+  const toggleCart = () => setIsVisible(!isVisible);
+  
+  // Close the cart
+  const closeCart = () => setIsVisible(false);
+
+  // Add an item to the cart
+  const handleAddToCart = (item) => {
+    setCart((prevCart) => [...prevCart, item]);
+  };
+
+  // Remove an item from the cart
+  const handleRemoveFromCart = (itemId) => {
+    setCart((prevCart) => prevCart.filter(item => item.id !== itemId));
+  };
+
+  // Total items in cart
+  const cartCount = cart.length;
+
+  // Effect to log cart updates (optional, can be modified for actual cart updates)
   useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.scrollY > 100) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-    window.addEventListener("scroll", toggleVisibility);
-    return () => window.removeEventListener("scroll", toggleVisibility);
-  }, []);
+    console.log("Cart updated:", cart);
+  }, [cart]);
+
+  return (
+    <div>
+      {/* Cart Toggle Button */}
+      <button onClick={toggleCart}>
+        {isVisible ? 'Hide Cart' : 'Show Cart'} ({cartCount})
+      </button>
+      
+      {/* Cart Details */}
+      {isVisible && (
+        <div style={{ border: '1px solid #ccc', padding: '1rem', marginTop: '1rem' }}>
+          <h2>Shopping Cart</h2>
+
+          {cart.length === 0 ? (
+            <p>Your cart is empty.</p>
+          ) : (
+            <ul>
+              {cart.map((item) => (
+                <li key={item.id}>
+                  {item.name} - ${item.price}
+                  <button onClick={() => handleRemoveFromCart(item.id)} style={{ marginLeft: '1rem' }}>
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          
+          {/* Cart Actions */}
+          <button onClick={closeCart}>Close Cart</button>
+        </div>
+      )}
+    </div>
+  );
 }
+
+export default CartHandle;
