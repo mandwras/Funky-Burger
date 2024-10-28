@@ -11,10 +11,10 @@ function CartHandle() {
   // Close the cart
   const closeCart = () => setIsVisible(false);
 
-  // Add an item to the cart
-  const handleAddToCart = (item) => {
-    setCart((prevCart) => [...prevCart, item]);
-  };
+  // // Add an item to the cart
+  // const handleAddToCart = (item) => {
+  //   setCart((prevCart) => [...prevCart, item]);
+  // };
 
   // Remove an item from the cart
   const handleRemoveFromCart = (itemId) => {
