@@ -17,21 +17,16 @@ const Header = ({ toggleCart }) => {
         />
 
         {/* Center: Navigation Links */}
-        <nav className="flex-grow flex justify-center space-x-[50px] items-center">
+        <nav className="flex-grow flex justify-center space-x-[5vw] items-center">
           <Link href="/" className="text-gray-900 font-semibold font-sans text-md">
             Home
           </Link>
-          <span className="text-gray-900 font-semibold"></span> {/* Separator */}
           <Link href="/menu" className="text-gray-900 font-semibold font-sans text-md">
             Menu
           </Link>
-          <span className="text-gray-900 font-semibold"></span> {/* Separator */}
           <Link href="/info" className="text-gray-900 font-semibold font-sans text-md">
             Info
-          </Link>
-          <span className="text-gray-900 font-semibold"></span> {/* Separator */}
-          
-          {/* Cart Button */}
+          </Link>   
           <div 
             onClick={toggleCart} 
             className="cursor-pointer text-gray-900 font-semibold font-sans text-md cart-button flex items-center transform hover:scale-110 transition-transform duration-300"

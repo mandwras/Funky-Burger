@@ -31,7 +31,6 @@ const Home = () => {
       <div className="bg-gradient-to-br from-gray-100 via-purple-50 to-indigo-100  min-h-screen font-pixel"> 
         <Header toggleCart={toggleCart} /> 
         <AboutUs />
-        <AboutUs2 />
         <ReturnToTop />
         <ShoppingCart toggleCart={toggleCart} isVisible={isCartButtonVisible} />
         <Footer />
