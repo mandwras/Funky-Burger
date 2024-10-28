@@ -28,11 +28,10 @@ const Home = () => {
           rel="stylesheet" 
         />
       </Head>
-      <div className="bg-gray-200 min-h-screen font-pixel"> 
+      <div className="bg-gradient-to-br from-gray-100 via-purple-50 to-indigo-100  min-h-screen font-pixel"> 
         <Header toggleCart={toggleCart} /> 
         <AboutUs />
         <AboutUs2 />
-        <AboutUs />
         <ReturnToTop />
         <ShoppingCart toggleCart={toggleCart} isVisible={isCartButtonVisible} />
         <Footer />

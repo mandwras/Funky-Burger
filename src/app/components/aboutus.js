@@ -33,7 +33,7 @@ const AboutUs = () => {
     <div className="flex-row pl-[30%] items-center justify-left mt-20">
       <div
         ref={cardRef}
-        className={`bg-gray-100 shadow-neumorphic rounded-[20px] p-6 w-80 transform transition-transform duration-300 ease-in-out ${
+        className={`bg-blue-100 shadow-blue-200  rounded-[20px] p-6 w-80 transform transition-transform duration-300 ease-in-out ${
           isVisible ? 'card-enter' : ''
         } shadow-lg`}
       >

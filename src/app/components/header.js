@@ -8,7 +8,7 @@ import Image from "next/image";
 const Header = ({ toggleCart }) => {
   return (
     <>
-      <header className="bg-gray-100 p-4 flex items-center justify-between shadow-neumorphic">
+      <header className="border-b border-gray-200 p-2 flex items-center justify-between ">
         {/* Left Side: Logo */}
         <Image
           src="/icons/burger-logo.png" 
@@ -17,26 +17,26 @@ const Header = ({ toggleCart }) => {
         />
 
         {/* Center: Navigation Links */}
-        <nav className="flex-grow flex justify-center space-x-3 items-center">
+        <nav className="flex-grow flex justify-center space-x-[50px] items-center">
           <Link href="/" className="text-gray-900 font-semibold font-sans text-md">
             Home
           </Link>
-          <span className="text-gray-900 font-semibold">|</span> {/* Separator */}
+          <span className="text-gray-900 font-semibold"></span> {/* Separator */}
           <Link href="/menu" className="text-gray-900 font-semibold font-sans text-md">
             Menu
           </Link>
-          <span className="text-gray-900 font-semibold">|</span> {/* Separator */}
+          <span className="text-gray-900 font-semibold"></span> {/* Separator */}
           <Link href="/info" className="text-gray-900 font-semibold font-sans text-md">
             Info
           </Link>
-          <span className="text-gray-900 font-semibold">|</span> {/* Separator */}
+          <span className="text-gray-900 font-semibold"></span> {/* Separator */}
           
           {/* Cart Button */}
           <div 
             onClick={toggleCart} 
             className="cursor-pointer text-gray-900 font-semibold font-sans text-md cart-button flex items-center transform hover:scale-110 transition-transform duration-300"
-          >
-            <Image src="/icons/cart.png" alt="Cart" className="w-9 h-9 object-contain" width={100} height={100} />
+          >Cart
+            {/* <Image src="/icons/cart.png" alt="Cart" className="w-9 h-9 object-contain" width={100} height={100} /> */}
           </div>
         </nav>
 

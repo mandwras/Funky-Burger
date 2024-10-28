@@ -20,7 +20,7 @@ const Menu = () => {
   } = useCartContext();
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gradient-to-br from-gray-100 via-purple-50 to-indigo-100 min-h-screen">
       <Header toggleCart={toggleCart} />
       <MenuItems handleAddToCart={handleAddToCart} />
       <ReturnToTop />
