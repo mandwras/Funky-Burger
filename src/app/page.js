@@ -13,6 +13,7 @@ import { useCartContext } from "./hooks/cartContext";
 const Home = () => {
   const {
     isCartVisible,
+    isCartButtonVisible,
     cart,
     toggleCart,
     closeCart,
@@ -33,7 +34,7 @@ const Home = () => {
         <AboutUs2 />
         <AboutUs />
         <ReturnToTop />
-        <ShoppingCart toggleCart={toggleCart} isVisible={isCartVisible} />
+        <ShoppingCart toggleCart={toggleCart} isVisible={isCartButtonVisible} />
         <Footer />
         <ShoppingCheck
           isVisible={isCartVisible}

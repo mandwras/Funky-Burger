@@ -11,6 +11,7 @@ import { useCartContext } from "../hooks/cartContext";
 const Menu = () => {
   const {
     isCartVisible,
+    isCartButtonVisible,
     cart,
     toggleCart,
     closeCart,
@@ -23,7 +24,7 @@ const Menu = () => {
       <Header toggleCart={toggleCart} />
       <MenuItems handleAddToCart={handleAddToCart} />
       <ReturnToTop />
-      <ShoppingCart toggleCart={toggleCart} isVisible={isCartVisible} />
+      <ShoppingCart toggleCart={toggleCart} isVisible={isCartButtonVisible} />
       <Footer bgColor="bg-white" />
       <ShoppingCheck
         isVisible={isCartVisible}

@@ -4,12 +4,29 @@ import { useState, useEffect } from "react";
 const useCart = () => {
   const [isCartVisible, setCartVisible] = useState(false);
   const [cart, setCart] = useState([]);
+  const [isCartButtonVisible, setCartButtonVisible] = useState(false)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const savedCart = localStorage.getItem("cart");
       setCart(savedCart ? JSON.parse(savedCart) : []);
     }
+  }, []);
+
+
+
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 150) {
+        setCartButtonVisible(true);
+      } else {
+        setCartButtonVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleCart = () => setCartVisible(!isCartVisible);
@@ -60,6 +77,7 @@ const useCart = () => {
 
   return {
     isCartVisible,
+    isCartButtonVisible,
     cart,
     toggleCart,
     closeCart,
