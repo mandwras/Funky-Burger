@@ -16,7 +16,6 @@ const Home = () => {
     cart,
     toggleCart,
     closeCart,
-    handleAddToCart,
     setCart,
   } = useCartContext();
 
