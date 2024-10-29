@@ -3,7 +3,6 @@ import React from "react";
 import Head from "next/head"; // Import Head from Next.js
 import Header from "./components/header";
 import AboutUs from "./components/aboutus";
-import AboutUs2 from "./components/aboutus2";
 import ReturnToTop from "./components/returnToTop";
 import Footer from "./components/footer";
 import ShoppingCart from "./components/shoppingCart"; 
