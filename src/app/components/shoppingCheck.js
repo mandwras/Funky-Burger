@@ -6,18 +6,21 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
 
   const handleQuantityChange = (item, change) => {
     setCart((prevCart) => {
-      return prevCart
+      const newCart = prevCart
         .map((cartItem) => {
           if (cartItem.id === item.id) {
             const updatedQuantity = cartItem.quantity + change;
             if (updatedQuantity <= 0) {
-              return null;
+              return null; // remove item from cart if quantity goes to 0 or less
             }
             return { ...cartItem, quantity: updatedQuantity };
           }
           return cartItem;
         })
-        .filter(Boolean);
+        .filter(Boolean); // remove null items
+  
+      localStorage.setItem("cart", JSON.stringify(newCart)); // update localStorage
+      return newCart;
     });
   };
 

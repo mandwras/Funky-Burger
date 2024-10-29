@@ -18,18 +18,18 @@ const Header = ({ toggleCart }) => {
 
         {/* Center: Navigation Links */}
         <nav className="flex-grow flex justify-center space-x-[5vw] items-center">
-          <Link href="/" className="text-gray-900 font-semibold font-sans text-md">
+          <Link href="/" className="text-gray-900 font-semibold pixel-font text-md">
             Home
           </Link>
-          <Link href="/menu" className="text-gray-900 font-semibold font-sans text-md">
+          <Link href="/menu" className="text-gray-900 font-semibold pixel-font text-md">
             Menu
           </Link>
-          <Link href="/info" className="text-gray-900 font-semibold font-sans text-md">
+          <Link href="/info" className="text-gray-900 font-semibold pixel-font text-md">
             Info
           </Link>   
           <div 
             onClick={toggleCart} 
-            className="cursor-pointer text-gray-900 font-semibold font-sans text-md cart-button flex items-center transform hover:scale-110 transition-transform duration-300"
+            className="cursor-pointer text-gray-900 font-semibold pixel-font text-md cart-button flex items-center transform hover:scale-110 transition-transform duration-300"
           >Cart
             {/* <Image src="/icons/cart.png" alt="Cart" className="w-9 h-9 object-contain" width={100} height={100} /> */}
           </div>
