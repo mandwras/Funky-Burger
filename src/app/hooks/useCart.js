@@ -29,6 +29,19 @@ const useCart = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+
+  // useEffect(() => {
+  //   if (isCartVisible) {
+  //     document.body.classList.add('overflow-hidden');
+  //   } else {
+  //     document.body.classList.remove('overflow-hidden');
+  //   }
+  //   return () => {
+  //     document.body.classList.remove('overflow-hidden');
+  //   };
+  // }, [isCartVisible]); 
+  
+
   const toggleCart = () => setCartVisible(!isCartVisible);
   const closeCart = () => setCartVisible(false);
 
