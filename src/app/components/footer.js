@@ -1,6 +1,6 @@
   import React from "react";
   import Image from "next/image";
-  const Footer = ({bgColor = "bg-gray-100"}) => {
+  const Footer = () => {
     return (
       <footer className={`border-t border-gray-200 py-[30px] mt-10 `}>
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between">
