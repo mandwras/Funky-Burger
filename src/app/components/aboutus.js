@@ -68,10 +68,10 @@ const AboutUs = () => {
       </div>
 
       {/* "Explore Our Burgers" Full Width Button with Arrow */}
-      <div className="mt-[150px] w-full px-4">
+      <div className="mt-[150px] w-full ">
         <button
           onClick={scrollToBurgers}
-          className="bg-blue-300 text-gray-800 rounded-full py-3 text-lg w-full hover:bg-blue-400 transition-colors relative"
+          className="bg-blue-300 text-gray-800  py-3 text-lg w-full hover:bg-blue-400 transition-colors relative"
         >
           Explore Our Burgers
           {/* More noticeable arrow */}
