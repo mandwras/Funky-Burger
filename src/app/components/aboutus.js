@@ -48,7 +48,7 @@ const AboutUs = () => {
         } shadow-lg overflow-hidden`}
       >
 
-        <div className="h-[500px] md:max-h-full overflow-auto md:overflow-visible">
+        <div className="h-[350px] md:max-h-full overflow-auto md:overflow-visible">
           <h2 className="text-lg font-semibold text-gray-800 mb-2">About Us</h2>
           <p className="text-gray-600 mb-4">
             Welcome to Funky Burger, where a love for juicy burgers collides with the thrill of classic arcade gaming! We’re all about bringing a unique, unforgettable experience to every visitor. Whether you’re a die-hard retro gamer, a burger aficionado, or just someone looking for a good time, we’ve got everything you need for a full-on fun fest.
