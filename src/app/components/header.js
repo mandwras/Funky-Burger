@@ -20,6 +20,10 @@ const Header = ({ toggleCart }) => {
           width={100}
           height={100}
         />
+        {/* Funky Burger text for mobile view */}
+        <span className="block text-gray-900 font-bold text-lg sm:block md:hidden pixel-font">
+          Funky Burger
+        </span>
         <nav className="hidden md:flex flex-grow justify-center space-x-[5vw] items-center">
           <Link href="/" className="text-gray-900 font-semibold pixel-font text-md">
             Home
@@ -77,7 +81,7 @@ const Header = ({ toggleCart }) => {
         </button>
       </header>
 
-     {/*Drawer*/}
+      {/* Drawer */}
       <div
         className={`fixed top-0 left-0 h-full w-64 bg-white shadow-md transform ${
           isDrawerOpen ? "translate-x-0" : "-translate-x-full"
