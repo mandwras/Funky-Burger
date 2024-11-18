@@ -48,8 +48,8 @@ const AboutUs = () => {
         } shadow-lg overflow-hidden`}
       >
 
-        <div className="h-[350px] md:max-h-full overflow-auto md:overflow-visible pixel-font text-tiny">
-          <h2 className="text-lg font-semibold text-gray-800 mb-2">About Us</h2>
+        <div className="h-[350px] md:max-h-full overflow-auto md:overflow-visible pixel-font text-tiny flex flex-col items-center">
+          <h2 className="text-lg font-semibold text-gray-800 mb-2 text-center">About Us</h2>
           <p className="text-gray-500 mb-4">
             Welcome to Funky Burger, where a love for juicy burgers collides with the thrill of classic arcade gaming! We’re all about bringing a unique, unforgettable experience to every visitor. Whether you’re a die-hard retro gamer, a burger aficionado, or just someone looking for a good time, we’ve got everything you need for a full-on fun fest.
           </p>
@@ -60,7 +60,7 @@ const AboutUs = () => {
             Once you’ve satisfied your taste buds, step into the arcade and relive the golden era of gaming. From classic pinball machines to retro consoles, our arcade offers a nostalgic blast from the past. Challenge your friends to Pac-Man, defend your honor in Street Fighter, or set a new personal best on our racing games. Here, it’s not just about playing; it’s about winning, sharing laughs, and making memories.
           </p>
           <Link href="/menu">
-            <button className="bg-gray-700 text-white rounded-full py-2 px-4 hover:bg-gray-600 transition-colors">
+            <button className="bg-gray-700 text-white rounded-full py-2 px-4 hover:bg-gray-600 transition-colors ">
               Order Now
             </button>
           </Link>
