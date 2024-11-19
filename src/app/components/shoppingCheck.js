@@ -27,7 +27,7 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
   return (
     <div
       className={`fixed top-0 right-0 h-full w-90 bg-white shadow-neumorphic transition-transform transform ${
-        isVisible ? "translate-x-0" : "translate-x-full"
+        isVisible ? "translate-x-0" : "translate-x-full" 
       } flex flex-col`}
     >
       {/* Cart Header */}

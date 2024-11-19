@@ -11,7 +11,7 @@ const MenuItems = ({ handleAddToCart }) => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await fetch("http://localhost:5000/items");
+        const res = await fetch("/items.json");
         const data = await res.json();
         setItems(data);
       } catch (error) {
