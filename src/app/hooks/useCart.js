@@ -18,16 +18,32 @@ const useCart = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 150) {
+      if (window.innerWidth <= 1024) {
         setCartButtonVisible(true);
       } else {
-        setCartButtonVisible(false);
+        if (window.scrollY > 150) {
+          setCartButtonVisible(true);
+        } else {
+          setCartButtonVisible(false);
+        }
       }
     };
-
+  
+    // Call handleScroll on mount to ensure correct initial state
+    handleScroll();
+  
+    // Add scroll event listener
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+  
+    // Cleanup event listener on unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
+  
+
+  
+  
 
 
   // useEffect(() => {
