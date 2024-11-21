@@ -8,7 +8,10 @@ const Checkout = () => {
   const { cart, setCart } = useCartContext();
   const [deliveryOption, setDeliveryOption] = useState("Takeaway"); // State to track the delivery option
 
-  const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalPrice = cart.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0,
+  );
 
   const handleQuantityChange = (item, change) => {
     setCart((prevCart) => {
@@ -32,7 +35,7 @@ const Checkout = () => {
 
   const toggleDeliveryOption = () => {
     setDeliveryOption((prevOption) =>
-      prevOption === "Takeaway" ? "Instore" : "Takeaway"
+      prevOption === "Takeaway" ? "Instore" : "Takeaway",
     );
   };
 
@@ -40,14 +43,18 @@ const Checkout = () => {
     <div className="bg-gradient-to-br from-gray-100 via-purple-50 to-indigo-100 min-h-screen">
       <Header />
       <div className="container mx-auto p-8">
-        <h1 className="text-3xl text-center mb-8 pixel-font text-gray-900">Checkout</h1>
+        <h1 className="text-3xl text-center mb-8 pixel-font text-gray-900">
+          Checkout
+        </h1>
         {cart.length > 0 ? (
           <div className="bg-white p-6 rounded-lg shadow-neumorphic">
             <ul className="space-y-4">
               {cart.map((item) => (
                 <li key={item.id} className="flex justify-between items-center">
                   <div>
-                    <h2 className="text-lg font-semibold text-gray-600">{item.name}</h2>
+                    <h2 className="text-lg font-semibold text-gray-600">
+                      {item.name}
+                    </h2>
                     <p className="text-gray-300">{item.description}</p>
                     <div className="flex items-center space-x-2">
                       <button
@@ -65,47 +72,51 @@ const Checkout = () => {
                       </button>
                     </div>
                   </div>
-                  <span className="text-gray-900">${(item.price * item.quantity).toFixed(2)}</span>
+                  <span className="text-gray-900">
+                    ${(item.price * item.quantity).toFixed(2)}
+                  </span>
                 </li>
               ))}
             </ul>
-            <div className="mt-6 flex justify-between items-center">
+            <div className="mt-8 flex justify-between items-center">
               <span className="text-xl font-bold text-gray-900">
                 Total: ${totalPrice.toFixed(2)}
               </span>
-              <div className="relative flex items-center space-x-4">
-        <button
-          onClick={() => toggleDeliveryOption("Takeaway")}
-          className={`w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${
-            deliveryOption === "Takeaway"
-              ? "text-blue-500"
-              : "text-gray-700"
-          }`}
-        >
-          Takeaway
-        </button>
-        <button
-          onClick={() => toggleDeliveryOption("Instore")}
-          className={`w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${
-            deliveryOption === "Instore"
-              ? "text-blue-500"
-              : "text-gray-700"
-          }`}
-        >
-          Instore
-        </button>
+              <div className="relative flex items-center ">
+                <button
+                  onClick={() => toggleDeliveryOption("Takeaway")}
+                  className={`w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${
+                    deliveryOption === "Takeaway"
+                      ? "text-blue-500"
+                      : "text-gray-700"
+                  }`}
+                >
+                  Takeaway
+                </button>
+                <button
+                  onClick={() => toggleDeliveryOption("Instore")}
+                  className={`w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${
+                    deliveryOption === "Instore"
+                      ? "text-blue-500"
+                      : "text-gray-700"
+                  }`}
+                >
+                  Instore
+                </button>
 
-        {/* Bottom Border */}
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-300">
-          <div
-            className={`absolute h-1 bg-blue-500 transition-all duration-300 ${
-              deliveryOption === "Takeaway" ? "w-1/2 left-0" : "w-1/2 left-1/2"
-            }`}
-          ></div>
-        </div>
-      </div>
-              <button className="px-4 py-2 bg-green-500 text-white rounded-md">
-                Proceed to Payment
+                {/* Bottom Border */}
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-300">
+                  <div
+                    className={`absolute h-1 bg-blue-500 transition-all duration-300 ${
+                      deliveryOption === "Takeaway"
+                        ? "w-1/2 left-0"
+                        : "w-1/2 left-1/2"
+                    }`}
+                  ></div>
+                </div>
+              </div>
+              <button className="px-4 py-2 bg-green-500 text-white rounded-md w-48">
+                {deliveryOption === "Takeaway" ? "Proceed to Payment" : "Scan QR Code"}  
               </button>
             </div>
           </div>
