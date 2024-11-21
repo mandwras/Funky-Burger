@@ -6,7 +6,7 @@ import { useCartContext } from "../hooks/cartContext";
 
 const Checkout = () => {
   const { cart, setCart } = useCartContext();
-  const [deliveryOption, setDeliveryOption] = useState("Takeaway"); // State to track the delivery option
+  const [deliveryOption, setDeliveryOption] = useState("Takeaway");
 
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -78,14 +78,15 @@ const Checkout = () => {
                 </li>
               ))}
             </ul>
-            <div className="mt-8 flex justify-between items-center">
-              <span className="text-xl font-bold text-gray-900">
-                Total: ${totalPrice.toFixed(2)}
-              </span>
-              <div className="relative flex items-center ">
+
+            <div className="mt-8 flex flex-col sm:flex-row sm:justify-between sm:items-center">
+            <span className="text-xl font-bold text-gray-900 mb-4 sm:mb-0">
+                  Total: ${totalPrice.toFixed(2)}
+                </span>
+              <div className="w-full sm:w-auto mb-4 sm:mb-0 relative flex justify-center sm:justify-start">
                 <button
                   onClick={() => toggleDeliveryOption("Takeaway")}
-                  className={`w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${
+                  className={`w-full sm:w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${
                     deliveryOption === "Takeaway"
                       ? "text-blue-500"
                       : "text-gray-700"
@@ -95,7 +96,7 @@ const Checkout = () => {
                 </button>
                 <button
                   onClick={() => toggleDeliveryOption("Instore")}
-                  className={`w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${
+                  className={`w-full sm:w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${
                     deliveryOption === "Instore"
                       ? "text-blue-500"
                       : "text-gray-700"
@@ -115,9 +116,15 @@ const Checkout = () => {
                   ></div>
                 </div>
               </div>
-              <button className="px-4 py-2 bg-green-500 text-white rounded-md w-48">
-                {deliveryOption === "Takeaway" ? "Proceed to Payment" : "Scan QR Code"}  
-              </button>
+
+              <div className="w-full sm:w-auto flex justify-between items-center sm:space-x-4">
+
+                <button className="px-4 py-2 bg-green-500 text-white rounded-md w-full sm:w-48">
+                  {deliveryOption === "Takeaway"
+                    ? "Proceed to Payment"
+                    : "Scan QR Code"}
+                </button>
+              </div>
             </div>
           </div>
         ) : (
