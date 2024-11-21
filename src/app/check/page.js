@@ -80,7 +80,7 @@ const Checkout = () => {
             </ul>
 
             <div className="mt-8 flex flex-col sm:flex-row sm:justify-between sm:items-center">
-            <span className="text-xl font-bold text-gray-900 mb-4 sm:mb-0">
+            <span className="text-l font-bold text-gray-700 mb-4 sm:mb-0">
                   Total: ${totalPrice.toFixed(2)}
                 </span>
               <div className="w-full sm:w-auto mb-4 sm:mb-0 relative flex justify-center sm:justify-start">
