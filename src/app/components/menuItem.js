@@ -8,23 +8,30 @@ const MenuItems = ({ handleAddToCart }) => {
   const [loading, setLoading] = useState(true);
 
   // Fetching items
-useEffect(() => {
-  const fetchItems = async () => {
-    try {
-      const res = await fetch("http://localhost:5000/items");
-      const data = await res.json();
-      setItems(data);
-    } catch (error) {
-      console.log("Error fetching data!", error);
-      setItems([]);  
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchItems();
-}, []);
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const res = await fetch("https://funky-burger.vercel.app/items.json");
+        const data = await res.json();
 
-  // Skeleton loader for items
+        // Ensure the response has the correct structure and that "items" is an array
+        if (data && Array.isArray(data.items)) {
+          setItems(data.items);
+        } else {
+          console.log("Error: 'items' is not an array:", data);
+          setItems([]);  // Fallback in case of malformed data
+        }
+      } catch (error) {
+        console.log("Error fetching data!", error);
+        setItems([]);  // Fallback to empty array if fetching fails
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchItems();
+  }, []);
+
+  // Skeleton loader for items (this will show during the loading state)
   const skeletonItems = Array(5).fill(0); // Adjust the number for the number of skeletons
 
   return (
@@ -68,8 +75,8 @@ useEffect(() => {
                     src={item.image}
                     alt={item.name}
                     className="w-32 h-32 object-cover rounded-lg mb-4 md:mb-0 md:mr-6"
-                    width={100}
-                    height={100}
+                    width={100} // You can adjust this to the image's actual width
+                    height={100} // You can adjust this to the image's actual height
                   />
                   <div>
                     <h3 className="pixel-font text-l font-semibold text-gray-900">
@@ -96,8 +103,8 @@ useEffect(() => {
                     src={item.rightIcon}
                     alt={item.rightDescription}
                     className="w-6 h-6 object-contain"
-                    width={100}
-                    height={100}
+                    width={100} // Adjust as per image dimensions
+                    height={100} // Adjust as per image dimensions
                   />
                   <p className="pixel-font text-sm text-gray-700">
                     {item.rightDescription}
