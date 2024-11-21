@@ -1,12 +1,12 @@
-// src/app/checkout/page.js
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { useCartContext } from "../hooks/cartContext";
 
 const Checkout = () => {
   const { cart, setCart } = useCartContext();
+  const [deliveryOption, setDeliveryOption] = useState("Takeaway"); // State to track the delivery option
 
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
@@ -17,24 +17,30 @@ const Checkout = () => {
           if (cartItem.id === item.id) {
             const updatedQuantity = cartItem.quantity + change;
             if (updatedQuantity <= 0) {
-              return null; // remove item from cart if quantity goes to 0 or less
+              return null; // Remove item from cart if quantity is 0 or less
             }
             return { ...cartItem, quantity: updatedQuantity };
           }
           return cartItem;
         })
-        .filter(Boolean); // remove null items
-  
-      localStorage.setItem("cart", JSON.stringify(newCart)); // update localStorage
+        .filter(Boolean); // Remove null items
+
+      localStorage.setItem("cart", JSON.stringify(newCart)); // Update localStorage
       return newCart;
     });
+  };
+
+  const toggleDeliveryOption = () => {
+    setDeliveryOption((prevOption) =>
+      prevOption === "Takeaway" ? "Instore" : "Takeaway"
+    );
   };
 
   return (
     <div className="bg-gradient-to-br from-gray-100 via-purple-50 to-indigo-100 min-h-screen">
       <Header />
       <div className="container mx-auto p-8">
-        <h1 className="text-3xl font-bold text-center mb-8 pixel-font text-gray-900">Checkout</h1>
+        <h1 className="text-3xl text-center mb-8 pixel-font text-gray-900">Checkout</h1>
         {cart.length > 0 ? (
           <div className="bg-white p-6 rounded-lg shadow-neumorphic">
             <ul className="space-y-4">
@@ -64,8 +70,34 @@ const Checkout = () => {
               ))}
             </ul>
             <div className="mt-6 flex justify-between items-center">
-              <span className="text-xl font-bold text-gray-900">Total: ${totalPrice.toFixed(2)}</span>
-              <button className="px-4 py-2 bg-green-500 text-white rounded-md">Proceed to Payment</button>
+              <span className="text-xl font-bold text-gray-900">
+                Total: ${totalPrice.toFixed(2)}
+              </span>
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={toggleDeliveryOption}
+                  className={`px-4 py-2 rounded-md font-bold ${
+                    deliveryOption === "Takeaway"
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-gray-700"
+                  }`}
+                >
+                  Takeaway
+                </button>
+                <button
+                  onClick={toggleDeliveryOption}
+                  className={`px-4 py-2 rounded-md font-bold ${
+                    deliveryOption === "Instore"
+                      ? "bg-blue-500 text-white"
+                      : "bg-gray-200 text-gray-700"
+                  }`}
+                >
+                  Instore
+                </button>
+              </div>
+              <button className="px-4 py-2 bg-green-500 text-white rounded-md">
+                Proceed to Payment
+              </button>
             </div>
           </div>
         ) : (

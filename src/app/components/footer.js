@@ -9,8 +9,10 @@
             <h1 className="text-gray-600 text-sm">
               © 2024 Funky Burger , Inc. All rights reserved.
             </h1>
+            <h1 className="text-gray-600 text-sm">
+              Powered by <span className="font-bold">{"GMDS"}</span>
+            </h1>
           </div>
-
           {/* Right Side: Icons */}
           <div className="flex justify-center items-center space-x-4">
             <a href="#" aria-label="Facebook">
