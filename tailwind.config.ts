@@ -14,6 +14,7 @@ const config: Config = {
       },
       fontSize: {
         tiny: '0.65rem',  // Define the custom tiny text size
+        smaller: '0.75rem',  // Define the custom tiny text size
       },
     },
   },

@@ -73,7 +73,6 @@ const Checkout = () => {
                     </div>
                     </div>
                     <p className="text-gray-300">{item.description}</p>
-
                   </div>
                   <span className="text-gray-900">
                     ${(item.price * item.quantity).toFixed(2)}

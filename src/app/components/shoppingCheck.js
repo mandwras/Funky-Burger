@@ -92,10 +92,10 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
       {/* Total Price and Checkout Button */}
       <div className="p-4 shadow-lg  m-2">
         <div className="flex justify-between items-center">
-          <div className="px-4 py-4 bg-purple-500 text-white rounded-md pixel-font text-sm ml-2">
+          <div className="px-4 py-4 bg-purple-500 text-white rounded-md pixel-font text-smaller ml-2">
             Total:${totalPrice.toFixed(2)}
           </div>
-          <div className="px-4 py-4 bg-green-500 text-white rounded-md pixel-font text-sm ml-2">
+          <div className="px-4 py-4 bg-green-500 text-white rounded-md pixel-font text-smaller ml-2">
             <Link href="/check">
             Checkout 
             </Link>
