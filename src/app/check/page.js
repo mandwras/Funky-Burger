@@ -73,28 +73,37 @@ const Checkout = () => {
               <span className="text-xl font-bold text-gray-900">
                 Total: ${totalPrice.toFixed(2)}
               </span>
-              <div className="flex items-center space-x-4">
-                <button
-                  onClick={toggleDeliveryOption}
-                  className={`px-4 py-2 rounded-md font-bold ${
-                    deliveryOption === "Takeaway"
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-700"
-                  }`}
-                >
-                  Takeaway
-                </button>
-                <button
-                  onClick={toggleDeliveryOption}
-                  className={`px-4 py-2 rounded-md font-bold ${
-                    deliveryOption === "Instore"
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-200 text-gray-700"
-                  }`}
-                >
-                  Instore
-                </button>
-              </div>
+              <div className="relative flex items-center space-x-4">
+        <button
+          onClick={() => toggleDeliveryOption("Takeaway")}
+          className={`w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${
+            deliveryOption === "Takeaway"
+              ? "text-blue-500"
+              : "text-gray-700"
+          }`}
+        >
+          Takeaway
+        </button>
+        <button
+          onClick={() => toggleDeliveryOption("Instore")}
+          className={`w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${
+            deliveryOption === "Instore"
+              ? "text-blue-500"
+              : "text-gray-700"
+          }`}
+        >
+          Instore
+        </button>
+
+        {/* Bottom Border */}
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-300">
+          <div
+            className={`absolute h-1 bg-blue-500 transition-all duration-300 ${
+              deliveryOption === "Takeaway" ? "w-1/2 left-0" : "w-1/2 left-1/2"
+            }`}
+          ></div>
+        </div>
+      </div>
               <button className="px-4 py-2 bg-green-500 text-white rounded-md">
                 Proceed to Payment
               </button>
