@@ -62,6 +62,7 @@ const useCart = () => {
   const closeCart = () => setCartVisible(false);
 
   const handleAddToCart = (item, e) => {
+    console.log("Item added to cart:", item)
     setCart((prevCart) => {
       const itemInCart = prevCart.find((cartItem) => cartItem.id === item.id);
       const newCart = itemInCart

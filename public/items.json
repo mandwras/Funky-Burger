@@ -1,84 +1,95 @@
 {
-    "items":[
-    {
+    "items": [
+      {
+        "id": 1,
         "name": "Classic Burger",
         "description": "A juicy beef patty with lettuce, tomato, and our special sauce.",
         "image": "/icons/burger1.png",
         "rightIcon": "/icons/heart.png",
         "rightDescription": "Customer Favorite",
         "price": 8.5
-    },
-    {
+      },
+      {
+        "id": 2,
         "name": "Cheeseburger",
         "description": "Topped with cheddar cheese, onions, and pickles.",
         "image": "/icons/burger1.png",
         "rightIcon": "/icons/star.png",
         "rightDescription": "Best Seller",
         "price": 9.5
-    },
-    {
+      },
+      {
+        "id": 3,
         "name": "Bacon Burger",
         "description": "A burger loaded with crispy bacon, cheese, and BBQ sauce.",
         "image": "/icons/burger1.png",
         "rightIcon": "/icons/star.png",
         "rightDescription": "Top Rated",
         "price": 8
-    },
-    {
+      },
+      {
+        "id": 4,
         "name": "Veggie Burger",
         "description": "A delicious plant-based patty with avocado and veggies.",
         "image": "/icons/burger1.png",
         "rightIcon": "/icons/leaf.png",
         "rightDescription": "Vegetarian Option",
         "price": 10
-    },
-    {
+      },
+      {
+        "id": 5,
         "name": "Mand Burger",
         "description": "A delicious plant-based patty with avocado and veggies.",
         "image": "/icons/burger1.png",
         "rightIcon": "/icons/leaf.png",
         "rightDescription": "Healthy Choice",
         "price": 9.5
-    },
-    {
+      },
+      {
+        "id": 6,
         "name": "Classic Burger",
         "description": "A juicy beef patty with lettuce, tomato, and our special sauce.",
         "image": "/icons/burger1.png",
         "rightIcon": "/icons/heart.png",
         "rightDescription": "Customer Favorite",
         "price": 8.5
-    },
-    {
+      },
+      {
+        "id": 7,
         "name": "Cheeseburger",
         "description": "Topped with cheddar cheese, onions, and pickles.",
         "image": "/icons/burger1.png",
         "rightIcon": "/icons/star.png",
         "rightDescription": "Best Seller",
         "price": 9.5
-    },
-    {
+      },
+      {
+        "id": 8,
         "name": "Bacon Burger",
         "description": "A burger loaded with crispy bacon, cheese, and BBQ sauce.",
         "image": "/icons/burger1.png",
         "rightIcon": "/icons/star.png",
         "rightDescription": "Top Rated",
         "price": 8
-    },
-    {
+      },
+      {
+        "id": 9,
         "name": "Veggie Burger",
         "description": "A delicious plant-based patty with avocado and veggies.",
         "image": "/icons/burger1.png",
         "rightIcon": "/icons/leaf.png",
         "rightDescription": "Vegetarian Option",
         "price": 10
-    },
-    {
+      },
+      {
+        "id": 10,
         "name": "Mand Burger",
         "description": "A delicious plant-based patty with avocado and veggies.",
         "image": "/icons/burger1.png",
         "rightIcon": "/icons/leaf.png",
         "rightDescription": "Healthy Choice",
         "price": 9.5
-    }
-]
-}
+      }
+    ]
+  }
+  

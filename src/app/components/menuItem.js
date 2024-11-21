@@ -64,9 +64,9 @@ const MenuItems = ({ handleAddToCart }) => {
                 </div>
               </div>
             ))
-          : items.map((item, index) => (
+          : items.map((item) => (
               <div
-                key={index}
+                key={item.id}
                 className="flex flex-col md:flex-row items-center justify-between bg-gray-100 p-6 rounded-lg shadow-neumorphic"
               >
                 {/* Left Side: Image and Text */}
