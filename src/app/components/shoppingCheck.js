@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
   // Calculate total price
@@ -94,9 +95,11 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
           <div className="px-4 py-4 bg-purple-500 text-white rounded-md pixel-font text-sm ml-2">
             Total:${totalPrice.toFixed(2)}
           </div>
-          <button className="px-4 py-4 bg-green-500 text-white rounded-md pixel-font text-sm ml-2">
-            Checkout
-          </button>
+          <div className="px-4 py-4 bg-green-500 text-white rounded-md pixel-font text-sm ml-2">
+            <Link href="/check">
+            Checkout 
+            </Link>
+          </div>
         </div>
       </div>
     </div>
