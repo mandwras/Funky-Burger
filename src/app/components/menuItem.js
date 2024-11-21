@@ -8,20 +8,21 @@ const MenuItems = ({ handleAddToCart }) => {
   const [loading, setLoading] = useState(true);
 
   // Fetching items
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const res = await fetch("/items.json");
-        const data = await res.json();
-        setItems(data);
-      } catch (error) {
-        console.log("Error fetching data!", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchItems();
-  }, []);
+useEffect(() => {
+  const fetchItems = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/items");
+      const data = await res.json();
+      setItems(data);
+    } catch (error) {
+      console.log("Error fetching data!", error);
+      setItems([]);  
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchItems();
+}, []);
 
   // Skeleton loader for items
   const skeletonItems = Array(5).fill(0); // Adjust the number for the number of skeletons
