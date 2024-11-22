@@ -95,11 +95,11 @@ const ShoppingCheck = ({ isVisible, closeCart, cart = [], setCart }) => {
           <div className="px-4 py-4 bg-purple-500 text-white rounded-md pixel-font text-smaller ml-2">
             Total:${totalPrice.toFixed(2)}
           </div>
-          <div className="px-4 py-4 bg-green-500 text-white rounded-md pixel-font text-smaller ml-2">
             <Link href="/check">
-            Checkout 
+            <div onClick={closeCart} className="px-4 py-4 bg-green-500 text-white rounded-md pixel-font text-smaller ml-2">
+              Checkout 
+            </div>
             </Link>
-          </div>
         </div>
       </div>
     </div>

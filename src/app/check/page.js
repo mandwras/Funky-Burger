@@ -53,7 +53,7 @@ const Checkout = () => {
                 <li key={item.id} className="flex justify-between items-center">
                   <div>
                     <div className="flex space-x-2">
-                    <h2 className="text-lg font-semibold text-gray-600">
+                    <h2 className="text-lg font-bold text-gray-600">
                       {item.name}
                     </h2>
                     <div className="flex items-center space-x-1">
