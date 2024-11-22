@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
@@ -8,9 +8,15 @@ const Checkout = () => {
   const { cart, setCart } = useCartContext();
   const [deliveryOption, setDeliveryOption] = useState("Takeaway");
 
+  const recommendedItems = [
+    { id: 101, name: "Extra Sauce", price: 1.5, description: "Add more flavor!" },
+    { id: 102, name: "Garlic Bread", price: 3.0, description: "Perfect side dish." },
+    { id: 103, name: "Drink Combo", price: 2.5, description: "Stay refreshed." },
+  ];
+
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
-    0,
+    0
   );
 
   const handleQuantityChange = (item, change) => {
@@ -20,22 +26,36 @@ const Checkout = () => {
           if (cartItem.id === item.id) {
             const updatedQuantity = cartItem.quantity + change;
             if (updatedQuantity <= 0) {
-              return null; // Remove item from cart if quantity is 0 or less
+              return null;
             }
             return { ...cartItem, quantity: updatedQuantity };
           }
           return cartItem;
         })
-        .filter(Boolean); // Remove null items
+        .filter(Boolean);
 
-      localStorage.setItem("cart", JSON.stringify(newCart)); // Update localStorage
+      localStorage.setItem("cart", JSON.stringify(newCart));
       return newCart;
+    });
+  };
+
+  const addRecommendedItem = (item) => {
+    setCart((prevCart) => {
+      const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
+      if (existingItem) {
+        return prevCart.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      }
+      return [...prevCart, { ...item, quantity: 1 }];
     });
   };
 
   const toggleDeliveryOption = () => {
     setDeliveryOption((prevOption) =>
-      prevOption === "Takeaway" ? "Instore" : "Takeaway",
+      prevOption === "Takeaway" ? "Instore" : "Takeaway"
     );
   };
 
@@ -53,24 +73,24 @@ const Checkout = () => {
                 <li key={item.id} className="flex justify-between items-center">
                   <div>
                     <div className="flex space-x-2">
-                    <h2 className="text-lg font-bold text-gray-600">
-                      {item.name}
-                    </h2>
-                    <div className="flex items-center space-x-1">
-                      <button
-                        onClick={() => handleQuantityChange(item, -1)}
-                        className="px-2 text-red-500"
-                      >
-                        -
-                      </button>
-                      <span className="text-gray-500">x{item.quantity}</span>
-                      <button
-                        onClick={() => handleQuantityChange(item, 1)}
-                        className="px-2 text-green-500"
-                      >
-                        +
-                      </button>
-                    </div>
+                      <h2 className="text-lg font-bold text-gray-600">
+                        {item.name}
+                      </h2>
+                      <div className="flex items-center space-x-1">
+                        <button
+                          onClick={() => handleQuantityChange(item, -1)}
+                          className="px-2 text-red-500"
+                        >
+                          -
+                        </button>
+                        <span className="text-gray-500">x{item.quantity}</span>
+                        <button
+                          onClick={() => handleQuantityChange(item, 1)}
+                          className="px-2 text-green-500"
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
                     <p className="text-gray-300">{item.description}</p>
                   </div>
@@ -82,9 +102,9 @@ const Checkout = () => {
             </ul>
 
             <div className="mt-8 flex flex-col sm:flex-row sm:justify-between sm:items-center">
-            <span className="text-l font-bold text-gray-700 mb-4 sm:mb-0">
-                  Total: ${totalPrice.toFixed(2)}
-                </span>
+              <span className="text-l font-bold text-gray-700 mb-4 sm:mb-0">
+                Total: ${totalPrice.toFixed(2)}
+              </span>
               <div className="w-full sm:w-auto mb-4 sm:mb-0 relative flex justify-center sm:justify-start">
                 <button
                   onClick={() => toggleDeliveryOption("Takeaway")}
@@ -107,7 +127,6 @@ const Checkout = () => {
                   Instore
                 </button>
 
-                {/* Bottom Border */}
                 <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-300">
                   <div
                     className={`absolute h-1 bg-blue-500 transition-all duration-300 ${
@@ -120,7 +139,6 @@ const Checkout = () => {
               </div>
 
               <div className="w-full sm:w-auto flex justify-between items-center sm:space-x-4">
-
                 <button className="px-4 py-2 bg-green-500 text-white rounded-md w-full sm:w-48">
                   {deliveryOption === "Takeaway"
                     ? "Proceed to Payment"
@@ -132,6 +150,34 @@ const Checkout = () => {
         ) : (
           <p className="text-center text-gray-600">Your cart is empty.</p>
         )}
+
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            You might wanna add:
+          </h2>
+          <ul className="space-y-4">
+            {recommendedItems.map((item) => (
+              <li
+                key={item.id}
+                className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow"
+              >
+                <div>
+                  <h3 className="font-semibold text-gray-700">{item.name}</h3>
+                  <p className="text-gray-500">{item.description}</p>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <span className="font-bold text-gray-800">${item.price.toFixed(2)}</span>
+                  <button
+                    onClick={() => addRecommendedItem(item)}
+                    className="px-3 py-1 bg-blue-500 text-white rounded-md"
+                  >
+                    Add
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       <Footer />
     </div>
