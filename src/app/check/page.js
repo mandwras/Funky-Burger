@@ -3,15 +3,16 @@ import React, { useState } from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
 import { useCartContext } from "../hooks/cartContext";
+import Link from "next/link";
 
 const Checkout = () => {
   const { cart, setCart } = useCartContext();
   const [deliveryOption, setDeliveryOption] = useState("Takeaway");
 
-  const recommendedItems = [
+  const recommendedItems = [ //teporary until i add them to json or database
     { id: 101, name: "Extra Sauce", price: 1.5, description: "Add more flavor!" },
-    { id: 102, name: "Garlic Bread", price: 3.0, description: "Perfect side dish." },
-    { id: 103, name: "Drink Combo", price: 2.5, description: "Stay refreshed." },
+    { id: 102, name: "Fried Potatoes", price: 3.0, description: "Perfect side dish." },
+    { id: 103, name: "Coca Cola", price: 2.5, description: "Stay refreshed." },
   ];
 
   const totalPrice = cart.reduce(
@@ -139,11 +140,13 @@ const Checkout = () => {
               </div>
 
               <div className="w-full sm:w-auto flex justify-between items-center sm:space-x-4">
-                <button className="px-4 py-2 bg-green-500 text-white rounded-md w-full sm:w-48">
-                  {deliveryOption === "Takeaway"
-                    ? "Proceed to Payment"
-                    : "Scan QR Code"}
-                </button>
+                <Link href={deliveryOption === "Takeaway" ? "/pay" : "/"  }>
+                  <button className="px-4 py-2 bg-green-500 text-white rounded-md w-full sm:w-48">
+                    {deliveryOption === "Takeaway"
+                      ? "Proceed to Payment"
+                      : "Scan QR Code"}
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
