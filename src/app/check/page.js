@@ -68,7 +68,7 @@ const Checkout = () => {
           Checkout
         </h1>
         {cart.length > 0 ? (
-          <div className="bg-white p-6 rounded-lg shadow-neumorphic">
+          <><div className="bg-white p-6 rounded-lg shadow-neumorphic">
             <ul className="space-y-4">
               {cart.map((item) => (
                 <li key={item.id} className="flex justify-between items-center">
@@ -109,38 +109,32 @@ const Checkout = () => {
               <div className="w-full sm:w-auto mb-4 sm:mb-0 relative flex justify-center sm:justify-start">
                 <button
                   onClick={() => toggleDeliveryOption("Takeaway")}
-                  className={`w-full sm:w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${
-                    deliveryOption === "Takeaway"
+                  className={`w-full sm:w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${deliveryOption === "Takeaway"
                       ? "text-blue-500"
-                      : "text-gray-700"
-                  }`}
+                      : "text-gray-700"}`}
                 >
                   Takeaway
                 </button>
                 <button
                   onClick={() => toggleDeliveryOption("Instore")}
-                  className={`w-full sm:w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${
-                    deliveryOption === "Instore"
+                  className={`w-full sm:w-1/2 text-center px-4 py-2 rounded-md font-bold transition ${deliveryOption === "Instore"
                       ? "text-blue-500"
-                      : "text-gray-700"
-                  }`}
+                      : "text-gray-700"}`}
                 >
                   Instore
                 </button>
 
                 <div className="absolute bottom-0 left-0 w-full h-1 bg-gray-300">
                   <div
-                    className={`absolute h-1 bg-blue-500 transition-all duration-300 ${
-                      deliveryOption === "Takeaway"
+                    className={`absolute h-1 bg-blue-500 transition-all duration-300 ${deliveryOption === "Takeaway"
                         ? "w-1/2 left-0"
-                        : "w-1/2 left-1/2"
-                    }`}
+                        : "w-1/2 left-1/2"}`}
                   ></div>
                 </div>
               </div>
 
               <div className="w-full sm:w-auto flex justify-between items-center sm:space-x-4">
-                <Link href={deliveryOption === "Takeaway" ? "/pay" : "/"  }>
+                <Link href={deliveryOption === "Takeaway" ? "/pay" : "/"}>
                   <button className="px-4 py-2 bg-green-500 text-white rounded-md w-full sm:w-48">
                     {deliveryOption === "Takeaway"
                       ? "Proceed to Payment"
@@ -150,37 +144,36 @@ const Checkout = () => {
               </div>
             </div>
           </div>
+          <div className="mt-12">
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                You might wanna add:
+              </h2>
+              <ul className="space-y-4">
+                {recommendedItems.map((item) => (
+                  <li
+                    key={item.id}
+                    className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow"
+                  >
+                    <div>
+                      <h3 className="font-semibold text-gray-700">{item.name}</h3>
+                      <p className="text-gray-500">{item.description}</p>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <span className="font-bold text-gray-800">${item.price.toFixed(2)}</span>
+                      <button
+                        onClick={() => addRecommendedItem(item)}
+                        className="px-3 py-1 bg-blue-500 text-white rounded-md"
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div></>
         ) : (
           <p className="text-center text-gray-600">Your cart is empty.</p>
         )}
-
-        <div className="mt-12">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
-            You might wanna add:
-          </h2>
-          <ul className="space-y-4">
-            {recommendedItems.map((item) => (
-              <li
-                key={item.id}
-                className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow"
-              >
-                <div>
-                  <h3 className="font-semibold text-gray-700">{item.name}</h3>
-                  <p className="text-gray-500">{item.description}</p>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <span className="font-bold text-gray-800">${item.price.toFixed(2)}</span>
-                  <button
-                    onClick={() => addRecommendedItem(item)}
-                    className="px-3 py-1 bg-blue-500 text-white rounded-md"
-                  >
-                    Add
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
       </div>
       <Footer />
     </div>
