@@ -32,7 +32,9 @@ const Header = ({ toggleCart }) => {
 
     // Cleanup listener on unmount
     return () => {
-      authListener?.data?.unsubscribe && authListener.data.unsubscribe();
+      if (authListener?.data?.unsubscribe) {
+        authListener.data.unsubscribe();
+      }
     };
   }, []);
 
