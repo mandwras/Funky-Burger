@@ -1,21 +1,24 @@
-"use client"
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import useCart from "../hooks/useCart"; // Import the useCart hook
 
 const PaymentPage = () => {
-  const [paymentMethod, setPaymentMethod] = useState("card"); // Default to card payment
+  const { emptyCart } = useCart();
+  const [paymentMethod, setPaymentMethod] = useState("card");
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [cvv, setCvv] = useState("");
   const [nameOnCard, setNameOnCard] = useState("");
   const [error, setError] = useState("");
 
+
   const handlePayment = (e) => {
     e.preventDefault();
-
+  
     if (paymentMethod === "card") {
-      // Basic validation for card payment
+      // Validation for card payment
       if (!cardNumber || !expiryDate || !cvv || !nameOnCard) {
         setError("Please fill in all card details.");
         return;
@@ -29,12 +32,17 @@ const PaymentPage = () => {
         return;
       }
       setError("");
+      
       alert("Card Payment Successful!");
+      emptyCart(); // Empty the cart after payment
     } else {
       // Cash payment logic
       alert("Cash Payment Selected! Please pay at the counter.");
+      emptyCart(); // Empty the cart after payment
     }
   };
+
+
 
   return (
     <div className="bg-gradient-to-br from-gray-100 via-purple-50 to-indigo-100 min-h-screen">
@@ -89,7 +97,8 @@ const PaymentPage = () => {
               <input
                 type="text"
                 id="nameOnCard"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="John Doe"
+                className="text-gray-600 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={nameOnCard}
                 onChange={(e) => setNameOnCard(e.target.value)}
               />
@@ -105,9 +114,15 @@ const PaymentPage = () => {
               <input
                 type="text"
                 id="cardNumber"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="text-gray-600 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={cardNumber}
-                onChange={(e) => setCardNumber(e.target.value)}
+                onChange={(e) => {
+                  const input = e.target.value.replace(/\D/g, "");
+                  const formatted = input.replace(/(.{4})/g, "$1 ").trim();
+                  setCardNumber(formatted);
+                }}
+                maxLength={19}
+                placeholder="#### #### #### ####"
               />
             </div>
 
@@ -121,10 +136,16 @@ const PaymentPage = () => {
               <input
                 type="text"
                 id="expiryDate"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="text-gray-600 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="MM/YY"
                 value={expiryDate}
-                onChange={(e) => setExpiryDate(e.target.value)}
+                onChange={(e) => {
+                  let value = e.target.value.replace(/\D/g, ""); 
+                  if (value.length > 2) {
+                    value = value.slice(0, 2) + "/" + value.slice(2, 4);
+                  }
+                  setExpiryDate(value);
+                }}
               />
             </div>
 
@@ -138,9 +159,11 @@ const PaymentPage = () => {
               <input
                 type="text"
                 id="cvv"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="###"
+                className="text-gray-600 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 value={cvv}
                 onChange={(e) => setCvv(e.target.value)}
+                maxLength={3}
               />
             </div>
 

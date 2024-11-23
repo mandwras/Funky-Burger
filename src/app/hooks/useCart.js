@@ -105,6 +105,13 @@ const useCart = () => {
     };
   };
 
+  //empty cart on checkout function
+  const emptyCart = () => {
+      setCart([]);
+      localStorage.removeItem("cart"); 
+      console.log("Cart is empty")
+  };
+
   return {
     isCartVisible,
     isCartButtonVisible,
@@ -113,6 +120,7 @@ const useCart = () => {
     closeCart,
     handleAddToCart,
     setCart,
+    emptyCart,
   };
 };
 
