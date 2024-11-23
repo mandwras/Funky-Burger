@@ -1,5 +1,5 @@
-"use client"
-import React, { useState, useEffect } from "react";
+"use client";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import supabase from "../lib/supabaseClient"; // Ensure correct import
@@ -7,6 +7,8 @@ import supabase from "../lib/supabaseClient"; // Ensure correct import
 const Header = ({ toggleCart }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [user, setUser] = useState(null); // State to track user
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility
+  const dropdownRef = useRef(null); // Ref for detecting clicks outside dropdown
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -31,7 +33,6 @@ const Header = ({ toggleCart }) => {
     // Cleanup listener on unmount
     return () => {
       authListener?.data?.unsubscribe && authListener.data.unsubscribe();
-      // This should properly unsubscribe now (depending on the version)
     };
   }, []);
 
@@ -41,9 +42,25 @@ const Header = ({ toggleCart }) => {
     setUser(null); // Clear user state after logout
   };
 
+  // Close the dropdown if clicked outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <header className="border-b border-gray-200 p-2 flex items-center justify-between">
+        {/* Logo on the left side */}
         <Image
           src="/icons/burger-logo.png"
           alt="Funky Burger Logo"
@@ -54,6 +71,8 @@ const Header = ({ toggleCart }) => {
         <span className="block text-gray-900 font-bold text-lg sm:block md:hidden pixel-font">
           Funky Burger
         </span>
+
+        {/* Centered Navigation links */}
         <nav className="hidden md:flex flex-grow justify-center space-x-[5vw] items-center">
           <Link href="/" className="text-gray-900 font-semibold pixel-font text-md">
             Home
@@ -70,11 +89,13 @@ const Header = ({ toggleCart }) => {
           >
             Cart
           </div>
+        </nav>
 
-          {/* Show login or profile based on user state */}
+        {/* Right-aligned login/profile button */}
+        <div className="hidden md:flex items-center">
           {!user ? (
             <Link href="/login">
-              <button className="flex items-center text-gray-900 font-semibold font-sans text-base">
+              <button className="flex text-gray-900 font-semibold font-sans text-base">
                 Log In
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -89,8 +110,18 @@ const Header = ({ toggleCart }) => {
             </Link>
           ) : (
             <div className="relative">
-              <button className="flex items-center text-gray-900 font-semibold">
-                {user?.email} {/* Display user's email */}
+              {/* Dummy Profile Picture */}
+              <button
+                className="flex items-center text-gray-900 font-semibold"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)} // Toggle dropdown visibility
+              >
+                <Image
+                  src="/icons/samaras.png"
+                  alt="Profile Picture"
+                  className="w-8 h-8 rounded-full"
+                  width={82}
+                  height={82}
+                />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-4 h-4 ml-2"
@@ -102,16 +133,21 @@ const Header = ({ toggleCart }) => {
                 </svg>
               </button>
               {/* Profile Dropdown */}
-              <div className="absolute right-0 mt-2 bg-white border rounded shadow-md w-48">
-                <button onClick={handleLogout} className="w-full px-4 py-2 text-gray-900 hover:bg-gray-100">
-                  Log Out
-                </button>
-              </div>
+              {isDropdownOpen && (
+                <div
+                  ref={dropdownRef}
+                  className="absolute right-0 mt-2 bg-white border rounded shadow-md w-48"
+                >
+                  <button onClick={handleLogout} className="w-full px-4 py-2 text-gray-900 hover:bg-gray-100">
+                    Log Out
+                  </button>
+                </div>
+              )}
             </div>
           )}
-        </nav>
+        </div>
 
-        {/* Drawer Icon */}
+        {/* Drawer Icon (Visible only in mobile view) */}
         <button
           onClick={toggleDrawer}
           className="md:hidden flex items-center focus:outline-none"
@@ -135,9 +171,7 @@ const Header = ({ toggleCart }) => {
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-br from-indigo-100 to-gray-100 via-purple-50 shadow-md transform ${
-          isDrawerOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out z-50`}
+        className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-br from-indigo-100 to-gray-100 via-purple-50 shadow-md transform ${isDrawerOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300 ease-in-out z-50`}
       >
         <div className="p-4 flex justify-between items-center border-b">
           <button
@@ -184,6 +218,7 @@ const Header = ({ toggleCart }) => {
           </Link>
         </nav>
       </div>
+
       {isDrawerOpen && (
         <div
           onClick={toggleDrawer}
