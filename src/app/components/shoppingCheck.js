@@ -112,3 +112,5 @@ export default ShoppingCheck;
 {/* <span className="text-md pixel-font text-gray-600">
 Total:${totalPrice.toFixed(2)}
 </span> */}
+
+//test
