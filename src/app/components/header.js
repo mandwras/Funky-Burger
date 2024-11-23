@@ -1,13 +1,44 @@
-"use client";
-import React, { useState } from "react";
+"use client"
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import supabase from "../lib/supabaseClient"; // Ensure correct import
 
 const Header = ({ toggleCart }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [user, setUser] = useState(null); // State to track user
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  // Check user session on mount and listen for auth state changes
+  useEffect(() => {
+    // Get the current session (if user is logged in) using the updated method
+    const getSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user);
+    };
+
+    // Initialize user session on component mount
+    getSession();
+
+    // Listen for changes in auth state
+    const authListener = supabase.auth.onAuthStateChange((event, session) => {
+      setUser(session?.user); // Update user state on login/logout
+    });
+
+    // Cleanup listener on unmount
+    return () => {
+      authListener?.data?.unsubscribe && authListener.data.unsubscribe();
+      // This should properly unsubscribe now (depending on the version)
+    };
+  }, []);
+
+  // Log out the user
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null); // Clear user state after logout
   };
 
   return (
@@ -20,7 +51,6 @@ const Header = ({ toggleCart }) => {
           width={100}
           height={100}
         />
-        {/* Funky Burger text for mobile view */}
         <span className="block text-gray-900 font-bold text-lg sm:block md:hidden pixel-font">
           Funky Burger
         </span>
@@ -40,24 +70,46 @@ const Header = ({ toggleCart }) => {
           >
             Cart
           </div>
-        </nav>
 
-        <div className="hidden md:flex">
-          <Link href="/login">
-            <button className="flex items-center text-gray-900 font-semibold font-sans text-base">
-              Log In
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-4 h-4 ml-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m0 0l-7-7m7 7l-7 7" />
-              </svg>
-            </button>
-          </Link>
-        </div>
+          {/* Show login or profile based on user state */}
+          {!user ? (
+            <Link href="/login">
+              <button className="flex items-center text-gray-900 font-semibold font-sans text-base">
+                Log In
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-4 h-4 ml-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m0 0l-7-7m7 7l-7 7" />
+                </svg>
+              </button>
+            </Link>
+          ) : (
+            <div className="relative">
+              <button className="flex items-center text-gray-900 font-semibold">
+                {user?.email} {/* Display user's email */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-4 h-4 ml-2"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m0 0l-7-7m7 7l-7 7" />
+                </svg>
+              </button>
+              {/* Profile Dropdown */}
+              <div className="absolute right-0 mt-2 bg-white border rounded shadow-md w-48">
+                <button onClick={handleLogout} className="w-full px-4 py-2 text-gray-900 hover:bg-gray-100">
+                  Log Out
+                </button>
+              </div>
+            </div>
+          )}
+        </nav>
 
         {/* Drawer Icon */}
         <button
@@ -83,7 +135,7 @@ const Header = ({ toggleCart }) => {
 
       {/* Drawer */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-br from-indigo-100 to-gray-100 via-purple-50  shadow-md transform ${
+        className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-br from-indigo-100 to-gray-100 via-purple-50 shadow-md transform ${
           isDrawerOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 ease-in-out z-50`}
       >
