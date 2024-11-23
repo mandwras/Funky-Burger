@@ -1,9 +1,67 @@
-"use client"; 
+"use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import supabase from "../lib/supabaseClient";
 
 const Form = () => {
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    try {
+      // Supabase Sign Up
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: { name }, // Save additional user data (name)
+        },
+      });
+
+      if (error) throw error;
+      console.log("Signup successful:", data);
+      alert("Signup successful! Check your email for confirmation.");
+    } catch (err) {
+      setError(err.message);
+      console.error("Signup error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    try {
+      // Supabase Login
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) throw error;
+      console.log("Login successful:", data);
+      alert("Login successful!");
+    } catch (err) {
+      setError(err.message);
+      console.error("Login error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <StyledWrapper>
       <div className="wrapper">
@@ -13,9 +71,10 @@ const Form = () => {
             <span className="slider" />
             <span className="card-side" />
             <div className="flip-card__inner">
+              {/* Login Form */}
               <div className="flip-card__front">
                 <div className="title">Log in</div>
-                <form className="flip-card__form" action="">
+                <form className="flip-card__form" onSubmit={handleLogin}>
                   <input
                     className="flip-card__input"
                     name="email"
@@ -30,16 +89,21 @@ const Form = () => {
                     type="password"
                     required
                   />
-                  <button className="flip-card__btn">Login!</button>
+                  <button className="flip-card__btn" disabled={loading}>
+                    {loading ? "Logging in..." : "Login!"}
+                  </button>
                 </form>
               </div>
+
+              {/* Signup Form */}
               <div className="flip-card__back">
                 <div className="title">Sign up</div>
-                <form className="flip-card__form" action="">
+                <form className="flip-card__form" onSubmit={handleSignup}>
                   <input
                     className="flip-card__input"
+                    name="name"
                     placeholder="Name"
-                    type="name"
+                    type="text"
                     required
                   />
                   <input
@@ -56,16 +120,23 @@ const Form = () => {
                     type="password"
                     required
                   />
-                  <button className="flip-card__btn">Sign Up!</button>
+                  <button className="flip-card__btn" disabled={loading}>
+                    {loading ? "Signing up..." : "Sign Up!"}
+                  </button>
                 </form>
               </div>
             </div>
           </label>
         </div>
       </div>
+
+      {error && <p className="error-message">{error}</p>}
     </StyledWrapper>
   );
 };
+
+
+
 
 const StyledWrapper = styled.div`
   display: flex; /* Center content horizontally */
