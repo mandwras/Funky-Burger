@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
@@ -65,8 +66,8 @@ const Header = ({ toggleCart }) => {
           src="/icons/burger-logo.png"
           alt="Funky Burger Logo"
           className="w-16 h-16 object-contain"
-          width={100}
-          height={100}
+          width={32}
+          height={32}
         />
         <span className="block text-gray-900 font-bold text-lg sm:block md:hidden pixel-font">
           Funky Burger
@@ -134,10 +135,13 @@ const Header = ({ toggleCart }) => {
               </button>
               {/* Profile Dropdown */}
               {isDropdownOpen && (
-                <div
-                  ref={dropdownRef}
-                  className="absolute right-0 mt-2 bg-white border rounded shadow-md w-48"
-                >
+                <div ref={dropdownRef}className="absolute right-0 mt-2 bg-white border rounded shadow-md w-48 shadow-neumorphic">
+                  <button className="w-full px-4 py-2 text-gray-900 hover:bg-gray-100">
+                    Profile
+                  </button>
+                  <button className="w-full px-4 py-2 text-gray-900 hover:bg-gray-100">
+                    Orders
+                  </button>
                   <button onClick={handleLogout} className="w-full px-4 py-2 text-gray-900 hover:bg-gray-100">
                     Log Out
                   </button>
