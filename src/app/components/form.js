@@ -57,6 +57,7 @@ const Form = () => {
     } catch (err) {
       setError(err.message);
       console.error("Login error:", err);
+      alert("Login failed!");
     } finally {
       setLoading(false);
     }
