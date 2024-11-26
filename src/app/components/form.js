@@ -2,11 +2,13 @@
 
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useRouter } from "next/navigation"; 
 import supabase from "../lib/supabaseClient";
 
 const Form = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const router = useRouter(); 
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -17,12 +19,11 @@ const Form = () => {
     const password = e.target.password.value;
 
     try {
-      // Supabase Sign Up
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          data: { name }, // Save additional user data (name)
+          data: { name }, 
         },
       });
 
@@ -54,6 +55,7 @@ const Form = () => {
       if (error) throw error;
       console.log("Login successful:", data);
       alert("Login successful!");
+      router.push("/"); 
     } catch (err) {
       setError(err.message);
       console.error("Login error:", err);
@@ -72,7 +74,7 @@ const Form = () => {
             <span className="slider" />
             <span className="card-side" />
             <div className="flip-card__inner">
-              {/* Login Form */}
+
               <div className="flip-card__front">
                 <div className="title">Log in</div>
                 <form className="flip-card__form" onSubmit={handleLogin}>
@@ -96,7 +98,7 @@ const Form = () => {
                 </form>
               </div>
 
-              {/* Signup Form */}
+
               <div className="flip-card__back">
                 <div className="title">Sign up</div>
                 <form className="flip-card__form" onSubmit={handleSignup}>
