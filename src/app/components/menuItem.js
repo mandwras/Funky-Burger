@@ -1,38 +1,42 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import supabase from "../lib/supabaseClient";
 
 const MenuItems = ({ handleAddToCart }) => {
-  // State for items and loading status
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetching items
+  // Fetching items from Supabase
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await fetch("https://funky-burger.vercel.app/items.json");
-        const data = await res.json();
+        // Fetch products from Supabase
+        const { data, error } = await supabase
+          .from('products') 
+          .select('*'); 
 
-        // Ensure the response has the correct structure and that "items" is an array
-        if (data && Array.isArray(data.items)) {
-          setItems(data.items);
+
+        if (error) {
+          console.log("Error fetching data from Supabase:", error);
+          setItems([]); // Fallback in case of error
         } else {
-          console.log("Error: 'items' is not an array:", data);
-          setItems([]);  // Fallback in case of malformed data
+          setItems(data); // Store fetched data in state
+          console.log("Fetched items:", data);
         }
       } catch (error) {
-        console.log("Error fetching data!", error);
-        setItems([]);  // Fallback to empty array if fetching fails
+        console.log("Error fetching data from Supabase!", error);
+        setItems([]); // Fallback in case of error
       } finally {
         setLoading(false);
       }
     };
+    
     fetchItems();
   }, []);
 
   // Skeleton loader for items (this will show during the loading state)
-  const skeletonItems = Array(5).fill(0); // Adjust the number for the number of skeletons
+  const skeletonItems = Array(5).fill(0); 
 
   return (
     <div className="p-8 flex-row">
@@ -69,14 +73,14 @@ const MenuItems = ({ handleAddToCart }) => {
                 key={item.id}
                 className="flex flex-col md:flex-row items-center justify-between bg-gray-100 p-6 rounded-lg shadow-neumorphic"
               >
-                {/* Left Side: Image and Text */}
+       
                 <div className="flex flex-col md:flex-row items-center">
                   <Image
-                    src={item.image}
+                    src={item.image_url} 
                     alt={item.name}
                     className="w-32 h-32 object-cover rounded-lg mb-4 md:mb-0 md:mr-6"
-                    width={100} // You can adjust this to the image's actual width
-                    height={100} // You can adjust this to the image's actual height
+                    width={100} 
+                    height={100} 
                   />
                   <div>
                     <h3 className="pixel-font text-l font-semibold text-gray-900">
@@ -100,14 +104,14 @@ const MenuItems = ({ handleAddToCart }) => {
                 {/* Right Side: Icon and Text */}
                 <div className="flex items-center space-x-2">
                   <Image
-                    src={item.rightIcon}
-                    alt={item.rightDescription}
+                    src={item.icon_url} 
+                    alt={item.right_description}
                     className="w-6 h-6 object-contain"
-                    width={100} // Adjust as per image dimensions
-                    height={100} // Adjust as per image dimensions
+                    width={100} 
+                    height={100} 
                   />
                   <p className="pixel-font text-sm text-gray-700">
-                    {item.rightDescription}
+                    {item.description2}
                   </p>
                 </div>
               </div>
