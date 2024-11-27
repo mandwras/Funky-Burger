@@ -153,7 +153,7 @@ const MenuItems = ({ handleAddToCart }) => {
       {/* Filter */}
       <button
         onClick={() => setDrawerOpen(!drawerOpen)}
-        className="fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-3 bg-emerald-500 rounded-lg text-white font-semibold text-lg hover:bg-emerald-600 transition-all duration-200 flex items-center justify-center"
+        className="fixed bottom-8 left-1/2 transform -translate-x-1/2 px-6 py-3 bg-emerald-500 rounded-[60px] text-white font-semibold text-sm  hover:bg-emerald-600 transition-all duration-200 flex items-center justify-center"
       >
 
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" id="filter" className="w-4 h-4 mr-2">
