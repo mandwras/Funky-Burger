@@ -191,7 +191,7 @@ const MenuItems = ({ handleAddToCart }) => {
               ))}
             </div>
             <div className="mt-6">
-              <h4 className="text-lg font-semibold text-gray-800 mb-2">Filter by Price</h4>
+              <h4 className="text-lg font-semibold text-gray-800 mb-2">By Price</h4>
               <input
                 type="range"
                 min="0"
