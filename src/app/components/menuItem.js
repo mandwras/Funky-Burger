@@ -166,7 +166,7 @@ const MenuItems = ({ handleAddToCart }) => {
       {drawerOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-10 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg w-3/4 sm:w-1/2 md:w-1/3 shadow-lg">
-            <h3 className="text-xl font-semibold text-center mb-4">Filter by Category</h3>
+            <h3 className="text-xl font-semibold text-gray-800 text-center mb-4">By Category</h3>
             <div className="flex flex-col space-y-4">
               <button
                 onClick={() => handleCategoryChange("all")}
