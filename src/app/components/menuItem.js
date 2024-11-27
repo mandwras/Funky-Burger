@@ -10,6 +10,8 @@ const MenuItems = ({ handleAddToCart }) => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [loading, setLoading] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [selectedPrice, setSelectedPrice] = useState(0); // Default value
+
 
   // Fetching items and categories from Supabase
   useEffect(() => {
@@ -170,7 +172,9 @@ const MenuItems = ({ handleAddToCart }) => {
             <div className="flex flex-col space-y-4">
               <button
                 onClick={() => handleCategoryChange("all")}
-                className={`px-6 py-3 rounded-lg text-lg font-semibold ${selectedCategory === "all" ? "bg-emerald-500 text-white" : "bg-gray-200 text-black"} hover:bg-emerald-400 transition-all duration-200`}
+                className={`px-6 py-3 rounded-lg text-lg font-semibold ${
+                  selectedCategory === "all" ? "bg-emerald-500 text-white" : "bg-gray-200 text-black"
+                } hover:bg-emerald-400 transition-all duration-200`}
               >
                 Show All
               </button>
@@ -178,11 +182,30 @@ const MenuItems = ({ handleAddToCart }) => {
                 <button
                   key={category.id}
                   onClick={() => handleCategoryChange(category.id)}
-                  className={`px-6 py-3 rounded-lg text-lg font-semibold ${selectedCategory === category.id ? "bg-emerald-500 text-white" : "bg-gray-200 text-black"} hover:bg-emerald-400 transition-all duration-200`}
+                  className={`px-6 py-3 rounded-lg text-lg font-semibold ${
+                    selectedCategory === category.id ? "bg-emerald-500 text-white" : "bg-gray-200 text-black"
+                  } hover:bg-emerald-400 transition-all duration-200`}
                 >
                   {category.name}
                 </button>
               ))}
+            </div>
+            <div className="mt-6">
+              <h4 className="text-lg font-semibold text-gray-800 mb-2">Filter by Price</h4>
+              <input
+                type="range"
+                min="0"
+                max="20"
+                step="1"
+                value={selectedPrice}
+                onChange={(e) => setSelectedPrice(e.target.value)}
+                className="w-full"
+              />
+              <div className="flex justify-between text-sm text-gray-600 mt-2">
+                <span>$0</span>
+                <span>${selectedPrice}</span>
+                <span>$20</span>
+              </div>
             </div>
             <div className="mt-4 text-center">
               <button

@@ -23,7 +23,7 @@ const PaymentPage = () => {
         setError("Please fill in all card details.");
         return;
       }
-      if (cardNumber.length !== 16 || isNaN(cardNumber)) {
+      if (cardNumber.length < 19 || isNaN(cardNumber)) {
         setError("Invalid card number. Must be 16 digits.");
         return;
       }
