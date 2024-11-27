@@ -120,7 +120,7 @@ const MenuItems = ({ handleAddToCart }) => {
                       <span className="p-1"></span>
                       {item.price}$
                     </h3>
-                    <p className="pixel-font text-sm text-gray-700 mt-2">
+                    <p className="pixel-font text-sm text-gray-700 mt-2 max-w-[1200px]">
                       {item.description}
                     </p>
                     <div className="hover:scale-105 transition-all duration-200 ease-in-out border mt-4 mb-3 w-[120px] h-8 shadow-md rounded-md border-gray-900 flex justify-center bg-white hover:bg-emerald-300">
@@ -172,7 +172,7 @@ const MenuItems = ({ handleAddToCart }) => {
                 onClick={() => handleCategoryChange("all")}
                 className={`px-6 py-3 rounded-lg text-lg font-semibold ${selectedCategory === "all" ? "bg-emerald-500 text-white" : "bg-gray-200 text-black"} hover:bg-emerald-400 transition-all duration-200`}
               >
-                All
+                Show All
               </button>
               {categories.map((category) => (
                 <button
