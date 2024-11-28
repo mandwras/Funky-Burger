@@ -112,6 +112,11 @@ const useCart = () => {
       console.log("Cart is empty")
   };
 
+  //function for total_ammount to populate the total amount of the cart in db
+    const calculateTotalAmount = () => {
+      return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    }
+
   return {
     isCartVisible,
     isCartButtonVisible,
@@ -121,6 +126,7 @@ const useCart = () => {
     handleAddToCart,
     setCart,
     emptyCart,
+    calculateTotalAmount,
   };
 };
 

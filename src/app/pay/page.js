@@ -1,29 +1,44 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation"; 
 import Header from "../components/header";
 import Footer from "../components/footer";
-import useCart from "../hooks/useCart"; // Import the useCart hook
+import useCart from "../hooks/useCart"; 
+import supabase from "../lib/supabaseClient"; 
 
 const PaymentPage = () => {
-  const { emptyCart } = useCart();
+  const { emptyCart, calculateTotalAmount } = useCart();
   const [paymentMethod, setPaymentMethod] = useState("card");
   const [cardNumber, setCardNumber] = useState("");
   const [expiryDate, setExpiryDate] = useState("");
   const [cvv, setCvv] = useState("");
   const [nameOnCard, setNameOnCard] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState(""); 
+  const rout = useRouter(); 
 
-
-  const handlePayment = (e) => {
+  const handlePayment = async (e) => {
     e.preventDefault();
-  
+
+    // Get the authenticated user's ID
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError) {
+      setError("Failed to retrieve user. Please log in.");
+      return;
+    }
+
+    const userId = user?.id; 
+    if (!userId) {
+      setError("User not logged in. Please log in to place an order.");
+      return;
+    }
+
+    // Validation for card payment
     if (paymentMethod === "card") {
-      // Validation for card payment
       if (!cardNumber || !expiryDate || !cvv || !nameOnCard) {
         setError("Please fill in all card details.");
         return;
       }
-      if (cardNumber.length < 19 || isNaN(cardNumber)) {
+      if (cardNumber.length < 19 || isNaN(cardNumber.replace(/\s/g, ""))) {
         setError("Invalid card number. Must be 16 digits.");
         return;
       }
@@ -32,17 +47,30 @@ const PaymentPage = () => {
         return;
       }
       setError("");
-      
-      alert("Card Payment Successful!");
-      emptyCart(); // Empty the cart after payment
-    } else {
-      // Cash payment logic
-      alert("Cash Payment Selected! Please pay at the counter.");
-      emptyCart(); // Empty the cart after payment
+    }
+
+    try {
+      // Insert into orders table
+      const { data, error } = await supabase.from("orders").insert([
+        {
+          user_id: userId, 
+          total_amount: calculateTotalAmount(), 
+          status: "placed", 
+          payment_status: paymentMethod === "card" ? "paid" : "pending", 
+        },
+      ]);
+
+      if (error) throw error;
+
+      alert(paymentMethod === "card" ? "Card Payment Successful!" : "Cash Payment Confirmed!");
+      emptyCart(); 
+      rout.push("/"); 
+
+    } catch (err) {
+      console.error("Error placing order:", err.message);
+      setError("Failed to place the order. Please try again.");
     }
   };
-
-
 
   return (
     <div className="bg-gradient-to-br from-gray-100 via-purple-50 to-indigo-100 min-h-screen">
@@ -52,46 +80,28 @@ const PaymentPage = () => {
           Payment Page
         </h1>
 
-        {/* Payment Method Toggle */}
         <div className="mb-6 flex justify-center space-x-4">
           <button
             onClick={() => setPaymentMethod("card")}
-            className={`px-4 py-2 rounded-md font-bold ${
-              paymentMethod === "card"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
+            className={`px-4 py-2 rounded-md font-bold ${paymentMethod === "card" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-700"}`}
           >
             Pay with Card
           </button>
           <button
             onClick={() => setPaymentMethod("cash")}
-            className={`px-4 py-2 rounded-md font-bold ${
-              paymentMethod === "cash"
-                ? "bg-green-500 text-white"
-                : "bg-gray-200 text-gray-700"
-            }`}
+            className={`px-4 py-2 rounded-md font-bold ${paymentMethod === "cash" ? "bg-green-500 text-white" : "bg-gray-200 text-gray-700"}`}
           >
             Pay with Cash
           </button>
         </div>
 
-        {/* Card Payment Form */}
         {paymentMethod === "card" && (
-          <form
-            onSubmit={handlePayment}
-            className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg"
-          >
+          <form onSubmit={handlePayment} className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
             {error && (
-              <p className="mb-4 text-red-500 text-center font-semibold">
-                {error}
-              </p>
+              <p className="mb-4 text-red-500 text-center font-semibold">{error}</p>
             )}
             <div className="mb-4">
-              <label
-                htmlFor="nameOnCard"
-                className="block text-gray-700 font-medium mb-2"
-              >
+              <label htmlFor="nameOnCard" className="block text-gray-700 font-medium mb-2">
                 Name on Card
               </label>
               <input
@@ -105,10 +115,7 @@ const PaymentPage = () => {
             </div>
 
             <div className="mb-4">
-              <label
-                htmlFor="cardNumber"
-                className="block text-gray-700 font-medium mb-2"
-              >
+              <label htmlFor="cardNumber" className="block text-gray-700 font-medium mb-2">
                 Card Number
               </label>
               <input
@@ -127,10 +134,7 @@ const PaymentPage = () => {
             </div>
 
             <div className="mb-4">
-              <label
-                htmlFor="expiryDate"
-                className="block text-gray-700 font-medium mb-2"
-              >
+              <label htmlFor="expiryDate" className="block text-gray-700 font-medium mb-2">
                 Expiry Date (MM/YY)
               </label>
               <input
@@ -140,7 +144,7 @@ const PaymentPage = () => {
                 placeholder="MM/YY"
                 value={expiryDate}
                 onChange={(e) => {
-                  let value = e.target.value.replace(/\D/g, ""); 
+                  let value = e.target.value.replace(/\D/g, "");
                   if (value.length > 2) {
                     value = value.slice(0, 2) + "/" + value.slice(2, 4);
                   }
@@ -150,10 +154,7 @@ const PaymentPage = () => {
             </div>
 
             <div className="mb-4">
-              <label
-                htmlFor="cvv"
-                className="block text-gray-700 font-medium mb-2"
-              >
+              <label htmlFor="cvv" className="block text-gray-700 font-medium mb-2">
                 CVV
               </label>
               <input
@@ -176,11 +177,10 @@ const PaymentPage = () => {
           </form>
         )}
 
-        {/* Cash Payment Message */}
         {paymentMethod === "cash" && (
           <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg text-center">
             <p className="text-gray-700 mb-4">
-              You have selected to pay with cash. Please proceed to the counter
+              You have selected to pay with cash. Please proceed to the counter.
             </p>
             <button
               onClick={handlePayment}
