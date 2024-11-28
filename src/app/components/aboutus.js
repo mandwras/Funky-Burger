@@ -6,7 +6,8 @@ import Image from 'next/image'; // Import Image from next/image
 
 const AboutUs = () => {
   const cardRef = useRef(null);
-  const burgersSectionRef = useRef(null); // Ref for the burgers section
+  const burgersSectionRef = useRef(null);
+  const burgersSectionRef2 = useRef(null); // Ref for the burgers section
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -35,6 +36,12 @@ const AboutUs = () => {
   const scrollToBurgers = () => {
     if (burgersSectionRef.current) {
       burgersSectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToClBurgers = () => {
+    if (burgersSectionRef2.current) {
+      burgersSectionRef2.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -73,7 +80,7 @@ const AboutUs = () => {
           onClick={scrollToBurgers}
           className="bg-blue-300 text-gray-800  py-3 text-sm w-full hover:bg-blue-400 transition-colors relative pixel-font"
         >
-          Explore Our Burgers
+          Explore Our Signature Burgers
           <span className="absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 text-lg text-gray-800 font-bold animate-bounce">
             ↓
           </span>
@@ -83,6 +90,74 @@ const AboutUs = () => {
       {/* Signature Burgers Section */}
       <div ref={burgersSectionRef} className="mt-12 p-6 bg-gray-100 rounded-xl w-full max-w-[1200px] mx-auto">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6 pixel-font">Our Signature Burgers</h2>
+        
+
+        <div className="flex flex-col items-center space-y-6">
+
+          <div className="flex flex-row bg-white shadow-lg rounded-lg p-6 w-full max-w-[700px]">
+
+            <div className="w-1/3 pr-6">
+              <h3 className="text-sm font-semibold text-gray-800 mb-2 pixel-font">The Funky Classic</h3>
+              <Image 
+                src="/icons/burger1.png"
+                alt="Arcade Beast Burger" 
+                width={100}
+                height={100}
+                className=" rounded-lg"
+              />
+            </div>
+
+            <div className="w-2/3">
+              <p className="text-gray-600 ">A juicy beef patty, melted cheddar, fresh lettuce, tomato, and our special funky sauce. Served on a toasted brioche bun.</p>
+            </div>
+          </div>
+
+          <div className="flex flex-row bg-white shadow-lg rounded-lg p-6 w-full max-w-[700px]">
+            <div className="w-1/3 pr-6">
+              <h3 className="text-sm font-semibold text-gray-800 mb-2 pixel-font">The Retro Deluxe</h3>
+              <Image 
+                src="/icons/burger1.png"
+                alt="Arcade Beast Burger" 
+                width={100}
+                height={100}
+                className=" rounded-lg"
+              />
+            </div>
+            <div className="w-2/3">
+              <p className="text-gray-600">Grilled chicken breast, crispy bacon, avocado, and spicy mayo, topped with lettuce and pickles on a soft sesame bun.</p>
+            </div>
+          </div>
+
+          <div className="flex flex-row bg-white shadow-lg rounded-lg p-6 w-full max-w-[700px]">
+            <div className="w-1/3 pr-6">
+              <h3 className="text-sm font-semibold text-gray-800 mb-2 pixel-font">The Arcade Beast</h3>
+              <Image 
+                src="/icons/burger1.png"
+                alt="Arcade Beast Burger" 
+                width={100}
+                height={100}
+                className=" rounded-lg"
+              />
+            </div>
+            <div className="w-2/3">
+              <p className="text-gray-600">Double beef patties, smoked gouda cheese, caramelized onions, and jalapenos, served on a brioche bun with tangy BBQ sauce.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="lg:mt-[150px]   w-full ">
+        <button
+          onClick={scrollToClBurgers}
+          className="bg-blue-300 text-gray-800  py-3 text-sm w-full hover:bg-blue-400 transition-colors relative pixel-font"
+        >
+          Explore Our Classic Burgers
+          <span className="absolute bottom-[-20px] left-1/2 transform -translate-x-1/2 text-lg text-gray-800 font-bold animate-bounce">
+            ↓
+          </span>
+        </button>
+      </div>
+      <div ref={burgersSectionRef2} className="mt-12 p-6 bg-gray-100 rounded-xl w-full max-w-[1200px] mx-auto">
+        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6 pixel-font">Our Classic Burgers</h2>
         
 
         <div className="flex flex-col items-center space-y-6">
