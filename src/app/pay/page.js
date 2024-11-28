@@ -39,7 +39,7 @@ const PaymentPage = () => {
 
     try {
       // Insert into orders table
-      const { data, error } = await supabase.from("orders").insert([ 
+      const { error } = await supabase.from("orders").insert([ 
         {
           user_id: userId, 
           total_amount: calculateTotalAmount(), 
