@@ -5,7 +5,7 @@ import BlogPost from "../components/blogPost";
 
 const Info = () => {
   const samplePosts = {
-    title: "The Best Restaurants in Town",
+    title: "Lorem Ipsum",
     body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus ut nunc ultricies aliquam. Nullam nec purus ut nunc ultricies aliquam.",
     readTime: 2,
     image: "/icons/burger_plate.jpeg",
@@ -13,7 +13,7 @@ const Info = () => {
 
   return (
     <div className="bg-gradient-to-br from-gray-50 via-white to-purple-50 min-h-screen">
-      <Header />
+      <Header showLimitedNav={true}/>
       <main className="px-6 lg:px-16 py-12">
         <div className="max-w-5xl mx-auto">
           <h1 className="text-4xl font-extrabold text-gray-800 text-center mb-10">

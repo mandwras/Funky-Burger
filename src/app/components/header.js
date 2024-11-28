@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import supabase from "../lib/supabaseClient"; // Ensure correct import
 
-const Header = ({ toggleCart }) => {
+const Header = ({ toggleCart , showLimitedNav = false}) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [user, setUser] = useState(null); // State to track user
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility
@@ -62,7 +62,6 @@ const Header = ({ toggleCart }) => {
   return (
     <>
       <header className="border-b border-gray-200 p-2 flex items-center justify-between">
-        {/* Logo on the left side */}
         <Image
           src="/icons/burger-logo.png"
           alt="Funky Burger Logo"
@@ -73,27 +72,27 @@ const Header = ({ toggleCart }) => {
         <span className="block text-gray-900 font-bold text-lg sm:block md:hidden pixel-font">
           Funky Burger
         </span>
-
-        {/* Centered Navigation links */}
         <nav className="hidden md:flex flex-grow justify-center space-x-[5vw] items-center">
           <Link href="/" className="text-gray-900 font-semibold pixel-font text-md">
             Home
           </Link>
-          <Link href="/menu" className="text-gray-900 font-semibold pixel-font text-md">
-            Menu
-          </Link>
-          <Link href="/info" className="text-gray-900 font-semibold pixel-font text-md">
-            Info
-          </Link>
-          <div
-            onClick={toggleCart}
-            className="cursor-pointer text-gray-900 font-semibold pixel-font text-md cart-button flex items-center transform hover:scale-110 transition-transform duration-300"
-          >
-            Cart
-          </div>
+          {!showLimitedNav && (
+            <>
+              <Link href="/menu" className="text-gray-900 font-semibold pixel-font text-md">
+                Menu
+              </Link>
+              <Link href="/info" className="text-gray-900 font-semibold pixel-font text-md">
+                Info
+              </Link>
+              <div
+                onClick={toggleCart}
+                className="cursor-pointer text-gray-900 font-semibold pixel-font text-md cart-button flex items-center transform hover:scale-110 transition-transform duration-300"
+              >
+                Cart
+              </div>
+            </>
+          )}
         </nav>
-
-        {/* Right-aligned login/profile button */}
         <div className="hidden md:flex items-center">
           {!user ? (
             <Link href="/login">
@@ -199,29 +198,33 @@ const Header = ({ toggleCart }) => {
             </svg>
           </button>
         </div>
-        <nav className="flex flex-col p-4 space-y-4">
-          <Link href="/" className="text-gray-900 font-semibold pixel-font text-md">
-            Home
-          </Link>
-          <Link href="/menu" className="text-gray-900 font-semibold pixel-font text-md">
-            Menu
-          </Link>
-          <Link href="/info" className="text-gray-900 font-semibold pixel-font text-md">
-            Info
-          </Link>
-          <div
-            onClick={() => {
-              toggleCart();
-              toggleDrawer();
-            }}
-            className="cursor-pointer text-gray-900 font-semibold pixel-font text-md cart-button flex items-center"
-          >
-            Cart
-          </div>
-          <Link href="/login" className="text-gray-900 font-semibold pixel-font text-md">
-            Log In
-          </Link>
-        </nav>
+           <nav className="flex flex-col p-4 space-y-4">
+              <Link href="/" className="text-gray-900 font-semibold pixel-font text-md">
+                Home
+              </Link>
+              {!showLimitedNav && (
+                <>
+                  <Link href="/menu" className="text-gray-900 font-semibold pixel-font text-md">
+                    Menu
+                  </Link>
+                  <Link href="/info" className="text-gray-900 font-semibold pixel-font text-md">
+                    Info
+                  </Link>
+                  <div
+                    onClick={() => {
+                      toggleCart();
+                      toggleDrawer();
+                    }}
+                    className="cursor-pointer text-gray-900 font-semibold pixel-font text-md cart-button flex items-center"
+                  >
+                    Cart
+                  </div>
+                  <Link href="/login" className="text-gray-900 font-semibold pixel-font text-md">
+                    Log In
+                  </Link>
+                </>
+              )}
+           </nav>
       </div>
 
       {isDrawerOpen && (
