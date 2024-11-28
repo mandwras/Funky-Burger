@@ -13,22 +13,36 @@ const Form = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
-
-    const name = e.target.name.value;
+  
+    const username = e.target.name.value; 
     const email = e.target.email.value;
     const password = e.target.password.value;
-
+  
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
         options: {
-          data: { name }, 
+          data: { username }, 
         },
       });
+  
+      if (signUpError) throw signUpError;
+      console.log("Signup successful:", signUpData);
+  
 
-      if (error) throw error;
-      console.log("Signup successful:", data);
+      const { user } = signUpData;
+      if (user) {
+        const { error: insertError } = await supabase.from('users').insert({
+          id: user.id, 
+          email: user.email,
+          username, 
+        });
+  
+        if (insertError) throw insertError;
+        console.log("User data inserted into 'users' table successfully");
+      }
+  
       alert("Signup successful! Check your email for confirmation.");
     } catch (err) {
       setError(err.message);
