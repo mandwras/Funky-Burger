@@ -5,10 +5,10 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import useCart from "../hooks/useCart"; 
 import supabase from "../lib/supabaseClient"; 
-import PaymentMethodSelector from "../components/PaymentMethodSelector";
-import CardPaymentForm from "../components/CardPaymentForm";
-import CashPaymentConfirmation from "../components/CashPaymentConfirmation";
-import ErrorMessage from "../components/ErrorMessage";
+import PaymentMethodSelector from "../components/paymentMethodSelector";
+import CardPaymentForm from "../components/cardPaymentForm";
+import CashPaymentConfirmation from "../components/cashPaymentConfirmation";
+import ErrorMessage from "../components/errorMessage";
 
 const PaymentPage = () => {
   const { emptyCart, calculateTotalAmount } = useCart();
