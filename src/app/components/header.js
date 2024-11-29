@@ -82,7 +82,7 @@ const Header = ({ toggleCart , showLimitedNav = false}) => {
                 Menu
               </Link>
               <Link href="/info" className="text-gray-900 font-semibold pixel-font text-md">
-                Info
+                Blog
               </Link>
               <div
                 onClick={toggleCart}
@@ -206,9 +206,9 @@ const Header = ({ toggleCart , showLimitedNav = false}) => {
                 <>
                   <Link href="/menu" className="text-gray-900 font-semibold pixel-font text-md">
                     Menu
-                  </Link>
+                  </Link>   
                   <Link href="/info" className="text-gray-900 font-semibold pixel-font text-md">
-                    Info
+                    Blog
                   </Link>
                   <div
                     onClick={() => {
