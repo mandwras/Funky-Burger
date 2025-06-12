@@ -1,2 +1,1 @@
-..
-Funky
+Funky Burger Portfolio Project 
